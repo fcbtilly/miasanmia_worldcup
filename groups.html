@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FIFA 2026 북중미 월드컵 조별 편성</title>
+<title>FIFA 2026 북중미 월드컵 조편성</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Barlow+Condensed:wght@400;600;700&display=swap');
 
@@ -36,8 +36,10 @@
     max-width: 1000px;
     margin: 0 auto 28px;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
   }
 
   .page-title {
@@ -60,6 +62,12 @@
     margin-top: 6px;
   }
 
+  .nav-btns {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
   .back-btn {
     display: inline-flex;
     align-items: center;
@@ -75,8 +83,6 @@
     letter-spacing: 0.03em;
     white-space: nowrap;
   }
-
-  .back-btn:hover { opacity: 0.85; }
 
   .groups-grid {
     max-width: 1000px;
@@ -116,9 +122,7 @@
     text-transform: uppercase;
   }
 
-  .group-teams {
-    list-style: none;
-  }
+  .group-teams { list-style: none; }
 
   .group-teams li {
     padding: 8px 14px;
@@ -131,9 +135,7 @@
     line-height: 1.3;
   }
 
-  .group-teams li:last-child {
-    border-bottom: none;
-  }
+  .group-teams li:last-child { border-bottom: none; }
 
   .group-teams li.korea {
     background: var(--korea-bg);
@@ -151,9 +153,7 @@
     min-width: 14px;
   }
 
-  .korea .team-num {
-    color: #6aaa2a;
-  }
+  .korea .team-num { color: #6aaa2a; }
 
   .note {
     max-width: 1000px;
@@ -166,12 +166,21 @@
   }
 
   .note-swatch {
-    width: 16px;
-    height: 10px;
-    border-radius: 2px;
+    width: 16px; height: 10px; border-radius: 2px;
     background: var(--korea-bg);
     border-left: 3px solid var(--korea-border);
     flex-shrink: 0;
+  }
+
+  /* ── 모바일 ── */
+  @media (max-width: 700px) {
+    body { padding: 16px 14px; }
+    .page-title { font-size: 26px; }
+    .page-header { margin-bottom: 16px; }
+    .groups-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+    .group-label { font-size: 17px; }
+    .group-teams li { font-size: 12px; padding: 7px 12px; }
+    .group-teams li.korea { padding-left: 9px; }
   }
 </style>
 </head>
@@ -182,7 +191,7 @@
     <div class="page-title">FIFA 2026 북중미 <span>월드컵</span></div>
     <div class="page-sub">조편성 현황 · 48개국 12개조</div>
   </div>
-  <div style="display:flex;gap:8px;">
+  <div class="nav-btns">
     <a href="stadiums.html" class="back-btn">🏟 경기장 현황</a>
     <a href="schedule_calendar.html" class="back-btn">← 일정표로 돌아가기</a>
   </div>

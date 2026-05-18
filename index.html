@@ -20,15 +20,12 @@
     --shaded-bg: #e8f3d8;
     --shaded-text: #3a6b0f;
     --shaded-border: #b8d98a;
-    --bold-color: #1a3a6b;
     --accent: #1a3a6b;
     --day-header-bg: #1a1917;
-    --day-header-text: #ffffff;
     --weekend-bg: #faf9f6;
     --sunday-accent: #c0392b;
     --saturday-accent: #1a3a6b;
     --empty-bg: #f0ede6;
-    --header-bg: #1a1917;
   }
 
   body {
@@ -39,12 +36,15 @@
     padding: 32px 24px;
   }
 
+  /* ── 헤더 ── */
   .page-header {
     max-width: 1200px;
     margin: 0 auto 28px;
     display: flex;
-    align-items: flex-end;
+    align-items: flex-start;
     justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
   }
 
   .page-title {
@@ -56,9 +56,7 @@
     line-height: 1;
   }
 
-  .page-title span {
-    color: var(--accent);
-  }
+  .page-title span { color: var(--accent); }
 
   .page-sub {
     font-size: 12px;
@@ -69,41 +67,105 @@
     margin-top: 6px;
   }
 
+  .header-right {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+  }
+
+  .nav-btns {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+  }
+
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 14px;
+    background: var(--day-header-bg);
+    color: #fff;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 4px;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
   .legend {
     display: flex;
-    gap: 16px;
+    gap: 14px;
     align-items: center;
     font-size: 11px;
     color: var(--text-secondary);
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
 
-  .legend-item {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
 
-  .legend-swatch {
-    width: 24px;
-    height: 10px;
-    border-radius: 2px;
-    background: var(--shaded-bg);
-    border: 1px solid var(--shaded-border);
+  .legend-swatch-korea {
+    width: 22px; height: 10px; border-radius: 2px;
+    background: #e8f3d8; border: 1px solid #b8d98a; flex-shrink: 0;
+  }
+  .legend-swatch-germany {
+    width: 22px; height: 10px; border-radius: 2px;
+    background: #ddeaf8; border: 1px solid #7aadd4; flex-shrink: 0;
   }
 
   .legend-bold-swatch {
-    width: 24px;
-    height: 10px;
-    border-radius: 2px;
-    background: transparent;
-    border: none;
-    font-size: 11px;
-    font-weight: 700;
-    color: #b52020;
-    display: flex;
-    align-items: center;
+    font-size: 11px; font-weight: 700; color: #b52020;
+    white-space: nowrap;
   }
 
+  /* ── 안내문 ── */
+  .notice {
+    max-width: 1200px;
+    margin: 0 auto 14px;
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 2;
+    padding: 10px 14px;
+    border-left: 3px solid var(--border-dark);
+    background: var(--weekend-bg);
+  }
+
+  /* ── 공통 경기 스타일 ── */
+  .match-time {
+    font-size: 10px;
+    color: var(--text-muted);
+    font-weight: 400;
+    display: block;
+    margin-bottom: 1px;
+  }
+
+  .match-teams {
+    font-size: 11.5px;
+    font-weight: 400;
+    line-height: 1.2;
+  }
+
+  /* 찐조국 (한국) - 초록 */
+  .match.shaded-korea { background: #e8f3d8; border-left: 2.5px solid #b8d98a; padding-left: 5px !important; }
+  .match.shaded-korea .match-teams { color: #3a6b0f; font-weight: 500; }
+  .match.shaded-korea .match-time  { color: #5a8a28; }
+
+  /* 짭조국 (독일) - 파랑 */
+  .match.shaded-germany { background: #ddeaf8; border-left: 2.5px solid #7aadd4; padding-left: 5px !important; }
+  .match.shaded-germany .match-teams { color: #1a3a6b; font-weight: 500; }
+  .match.shaded-germany .match-time  { color: #2a5a9b; }
+
+  .match.bold .match-teams   { font-weight: 700; color: #b52020; }
+  .match.bold .match-time    { color: #c04040; }
+
+  /* ════════════════════════════════
+     PC: 달력 뷰
+  ════════════════════════════════ */
   .cal-wrapper {
     max-width: 1200px;
     margin: 0 auto;
@@ -126,17 +188,13 @@
     font-size: 13px;
     font-weight: 600;
     letter-spacing: 0.1em;
-    text-transform: uppercase;
     color: rgba(255,255,255,0.6);
   }
 
-  .cal-head-cell:first-child { color: rgba(220, 100, 90, 0.85); }
-  .cal-head-cell:last-child  { color: rgba(120, 160, 220, 0.85); }
+  .cal-head-cell:first-child { color: rgba(220,100,90,0.85); }
+  .cal-head-cell:last-child  { color: rgba(120,160,220,0.85); }
 
-  .cal-body {
-    display: flex;
-    flex-direction: column;
-  }
+  .cal-body { display: flex; flex-direction: column; }
 
   .cal-week {
     display: grid;
@@ -144,26 +202,18 @@
     border-top: 1px solid var(--border);
   }
 
-  .cal-week:first-child {
-    border-top: none;
-  }
+  .cal-week:first-child { border-top: none; }
 
   .cal-cell {
     min-height: 130px;
     border-right: 1px solid var(--border);
-    padding: 0;
     background: var(--surface);
-    vertical-align: top;
     position: relative;
   }
 
   .cal-cell:last-child { border-right: none; }
-
-  .cal-cell.empty {
-    background: var(--empty-bg);
-  }
-
-  .cal-cell.is-sunday .cell-date { color: var(--sunday-accent); }
+  .cal-cell.empty { background: var(--empty-bg); }
+  .cal-cell.is-sunday  .cell-date { color: var(--sunday-accent); }
   .cal-cell.is-saturday .cell-date { color: var(--saturday-accent); }
 
   .cell-date {
@@ -175,76 +225,125 @@
     line-height: 1;
   }
 
-  .cell-month {
-    font-size: 10px;
-    font-weight: 400;
-    color: var(--text-muted);
-    letter-spacing: 0.05em;
-    margin-left: 2px;
-  }
-
-  .matches {
+  .cal-matches {
     padding: 2px 6px 8px;
     display: flex;
     flex-direction: column;
     gap: 3px;
   }
 
-  .match {
+  .cal-matches .match {
     font-size: 11px;
     line-height: 1.3;
     padding: 3px 6px;
     border-radius: 3px;
     color: var(--text-primary);
-    background: transparent;
   }
 
-  .match-time {
-    font-size: 10px;
-    color: var(--text-muted);
-    font-weight: 400;
-    display: block;
-    margin-bottom: 1px;
-  }
+  /* 모바일 달력 숨김 */
+  .list-view { display: none; }
 
-  .match-teams {
-    font-size: 11.5px;
-    font-weight: 400;
-    line-height: 1.2;
-  }
+  /* ════════════════════════════════
+     모바일: 리스트 뷰
+  ════════════════════════════════ */
+  @media (max-width: 700px) {
+    body { padding: 16px 14px; }
 
-  .match.shaded {
-    background: var(--shaded-bg);
-    border-left: 2.5px solid var(--shaded-border);
-    padding-left: 5px;
-  }
+    .page-title { font-size: 26px; }
+    .page-sub { font-size: 11px; }
 
-  .match.shaded .match-teams {
-    color: var(--shaded-text);
-    font-weight: 500;
-  }
+    .page-header { margin-bottom: 16px; }
 
-  .match.shaded .match-time {
-    color: #5a8a28;
-  }
+    .header-right { align-items: flex-start; }
+    .nav-btns { justify-content: flex-start; }
+    .legend { justify-content: flex-start; }
 
-  .match.bold .match-teams {
-    font-weight: 700;
-    color: #b52020;
-  }
+    .notice { font-size: 11px; line-height: 1.8; }
 
-  .match.bold .match-time {
-    color: #c04040;
-  }
+    /* 달력 숨기고 리스트 표시 */
+    .cal-wrapper { display: none; }
+    .list-view { display: block; }
 
-  /* 날짜 표시 없는 빈 셀 */
-  .cell-date.empty-label {
-    visibility: hidden;
+    .list-day {
+      margin-bottom: 10px;
+      border-radius: 6px;
+      overflow: hidden;
+      border: 1px solid var(--border-dark);
+      box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+    }
+
+    .list-day-header {
+      background: var(--day-header-bg);
+      padding: 8px 14px;
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+    }
+
+    .list-day-date {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 17px;
+      font-weight: 700;
+      color: #fff;
+    }
+
+    .list-day-date.sunday { color: #f08070; }
+    .list-day-date.saturday { color: #90b8e8; }
+
+    .list-day-weekday {
+      font-size: 11px;
+      color: rgba(255,255,255,0.5);
+      letter-spacing: 0.04em;
+    }
+
+    .list-matches { background: var(--surface); }
+
+    .list-match {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .list-match:last-child { border-bottom: none; }
+
+    .list-match .match-time {
+      font-size: 11px;
+      color: var(--text-muted);
+      min-width: 64px;
+      flex-shrink: 0;
+      margin: 0;
+      display: block;
+    }
+
+    .list-match .match-teams {
+      font-size: 13px;
+      flex: 1;
+      padding: 4px 8px;
+      border-radius: 4px;
+    }
+
+    .list-match.shaded-korea .match-teams {
+      background: #e8f3d8; border-left: 2.5px solid #b8d98a;
+      color: #3a6b0f; font-weight: 500; padding-left: 6px;
+    }
+    .list-match.shaded-korea .match-time { color: #5a8a28; }
+
+    .list-match.shaded-germany .match-teams {
+      background: #ddeaf8; border-left: 2.5px solid #7aadd4;
+      color: #1a3a6b; font-weight: 500; padding-left: 6px;
+    }
+    .list-match.shaded-germany .match-time { color: #2a5a9b; }
+
+    .list-match.bold .match-teams { font-weight: 700; color: #b52020; }
+    .list-match.bold .match-time  { color: #c04040; }
   }
 
   @media print {
     body { padding: 0; background: white; }
     .cal-wrapper { box-shadow: none; border: 1px solid #ccc; }
+    .list-view { display: none !important; }
   }
 </style>
 </head>
@@ -255,27 +354,34 @@
     <div class="page-title">FIFA 2026 북중미 <span>월드컵</span></div>
     <div class="page-sub">조별리그 주요경기 일정 · 한국 시간 기준</div>
   </div>
-  <div style="display:flex;flex-direction:column;align-items:flex-end;gap:10px;">
-    <a href="groups.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--day-header-bg);color:#fff;font-family:'Noto Sans KR',sans-serif;font-size:12px;font-weight:500;text-decoration:none;border-radius:4px;letter-spacing:0.03em;white-space:nowrap;">⚽ 조편성 보기</a>
-    <a href="stadiums.html" style="display:inline-flex;align-items:center;gap:6px;padding:8px 16px;background:var(--day-header-bg);color:#fff;font-family:'Noto Sans KR',sans-serif;font-size:12px;font-weight:500;text-decoration:none;border-radius:4px;letter-spacing:0.03em;white-space:nowrap;">🏟 경기장 현황</a>
+  <div class="header-right">
+    <div class="nav-btns">
+      <a href="groups.html" class="nav-btn">⚽ 조편성 보기</a>
+      <a href="stadiums.html" class="nav-btn">🏟 경기장 현황</a>
+    </div>
     <div class="legend">
       <div class="legend-item">
-        <div class="legend-swatch"></div>
-        <span>조국의 경기</span>
+        <div class="legend-swatch-korea"></div>
+        <span>찐조국 경기</span>
       </div>
       <div class="legend-item">
-        <div class="legend-bold-swatch">빨강</div>
+        <div class="legend-swatch-germany"></div>
+        <span>짭조국 경기</span>
+      </div>
+      <div class="legend-item">
+        <span class="legend-bold-swatch">빨강</span>
         <span>주목할 만한 경기</span>
       </div>
     </div>
   </div>
 </div>
 
-<div style="max-width:1200px;margin:0 auto 14px;font-size:12px;color:var(--text-secondary);line-height:2;padding:10px 14px;border-left:3px solid var(--border-dark);background:var(--weekend-bg);">
+<div class="notice">
   * 이 페이지는 여러 개의 심장을 가진 바바리안 걸들의 원활한 경기시청을 돕고자 제작되었습니다.<br>
-  * 주목도가 낮은 약팀 간의 경기는 제외하였습니다. (단, <span style="background:var(--shaded-bg);color:var(--shaded-text);font-weight:500;padding:1px 5px;border-radius:3px;">찐조국</span> 및 <span style="background:var(--shaded-bg);color:var(--shaded-text);font-weight:500;padding:1px 5px;border-radius:3px;">짭조국</span>과 같은 조의 경기는 전력분석이 필요하기 때문에 포함함.)
+  * 주목도가 낮은 약팀 간의 경기는 제외하였습니다. (단, <span style="background:#e8f3d8;color:#3a6b0f;font-weight:500;padding:1px 5px;border-radius:3px;">찐조국</span> 및 <span style="background:#ddeaf8;color:#1a3a6b;font-weight:500;padding:1px 5px;border-radius:3px;">짭조국</span>과 같은 조의 경기는 전력분석이 필요하기 때문에 포함함.)
 </div>
 
+<!-- PC 달력 -->
 <div class="cal-wrapper">
   <div class="cal-head">
     <div class="cal-head-cell">일</div>
@@ -286,61 +392,24 @@
     <div class="cal-head-cell">금</div>
     <div class="cal-head-cell">토</div>
   </div>
-
-  <div class="cal-body">
-
-    <!-- 주 1: 6/8(일)~6/14(토) -->
-    <div class="cal-week">
-      <!-- 일: 6/8 빈 -->
-      <div class="cal-cell is-sunday empty"><div class="cell-date">8<span class="cell-month">일</span></div></div>
-      <!-- 월: 6/9 빈 -->
-      <div class="cal-cell empty"><div class="cell-date">9</div></div>
-      <!-- 화: 6/10 빈 -->
-      <div class="cal-cell empty"><div class="cell-date">10</div></div>
-      <!-- 수: 6/11 빈 -->
-      <div class="cal-cell empty"><div class="cell-date">11</div></div>
-      <!-- 목: 6/12 금요일 — 달력상 목은 12일이지만 12일은 금요일. 주 배치: 일~토 기준, 6/8(일)~6/14(토) -->
-      <!-- 6/12는 금요일(6번째 열) -->
-      <!-- 목: 6/12? No, 6/8=일,9=월,10=화,11=수,12=목... wait 6/8이 무슨 요일인지 계산 필요 -->
-      <!-- 6/12 = 금요일 (문제에서 주어짐). 그러면 6/8=월, 하지만 주는 일요일 시작. 
-           6/12 금요일이면: 6/8=월,6/9=화...6/7=일. 
-           첫 주: 6/7(일)~6/13(토). 6/7 이전은 빈칸.
-           실제로 6/12=금, 6/13=토, 6/14=일 -->
-      <!-- 재계산: 6/12=금. 주 시작(일)=6/8. 6/8=일,6/9=월,6/10=화,6/11=수,6/12=목?? 
-           6/12=금이면 6/11=목, 6/10=수, 6/9=화, 6/8=월, 6/7=일.
-           첫 주(일~토): 6/7(일)~6/13(토) -->
-      <div class="cal-cell empty"><div class="cell-date">12</div></div>
-      <!-- 이 열은 목요일 = 6/12가 금요일이므로 목=6/11, 금=6/12 맞음 -->
-      <!-- 다시 올바르게: 6/12=금, 그러므로 첫주 일~토 = 6/8~6/14? 
-           6/8: 6/12가 금이면, 금=6, 목=5, 수=4, 화=3, 월=2, 일=1 기준으로
-           6/12=금 → 6/9=화, 6/8=월, 6/7=일
-           첫 주: 6/7(일)~6/13(토)
-           실제 일정 시작 6/12=금 -->
-      <!-- 위 셀 재배치는 아래에서 올바르게 -->
-      <div class="cal-cell empty"><div class="cell-date">13</div></div>
-      <div class="cal-cell is-saturday empty"><div class="cell-date">14<span class="cell-month">일</span></div></div>
-    </div>
-
-  </div>
+  <div class="cal-body"></div>
 </div>
 
-<script>
-// 데이터 정의
-// 6/12 = 금요일. 달력: 일~토
-// 6/7(일) 6/8(월) 6/9(화) 6/10(수) 6/11(목) 6/12(금) 6/13(토)
-// 6/14(일) 6/15(월) ...
+<!-- 모바일 리스트 -->
+<div class="list-view" id="list-view"></div>
 
+<script>
 const MATCHES = {
   "6/12": [
     { time: "오전 04:00", teams: "멕시코 vs 남아공", type: "" },
-    { time: "오전 11:00", teams: "한국 vs 체코", type: "shaded" }
+    { time: "오전 11:00", teams: "한국 vs 체코", type: "shaded-korea" }
   ],
   "6/14": [
     { time: "오전 07:00", teams: "브라질 vs 모로코", type: "bold" },
     { time: "오후 01:00", teams: "호주 vs 튀르키예", type: "" }
   ],
   "6/15": [
-    { time: "오전 02:00", teams: "독일 vs 퀴라소", type: "shaded" },
+    { time: "오전 02:00", teams: "독일 vs 퀴라소", type: "shaded-germany" },
     { time: "오전 05:00", teams: "네덜란드 vs 일본", type: "bold" },
     { time: "오전 08:00", teams: "코트디부아르 vs 에콰도르", type: "" },
     { time: "오전 11:00", teams: "스웨덴 vs 튀니지", type: "" }
@@ -364,7 +433,7 @@ const MATCHES = {
   "6/19": [
     { time: "오전 01:00", teams: "체코 vs 남아공", type: "" },
     { time: "오전 04:00", teams: "스위스 vs 보스니아", type: "" },
-    { time: "오전 10:00", teams: "멕시코 vs 한국", type: "shaded" }
+    { time: "오전 10:00", teams: "멕시코 vs 한국", type: "shaded-korea" }
   ],
   "6/20": [
     { time: "오전 07:00", teams: "스코틀랜드 vs 모로코", type: "" },
@@ -373,7 +442,7 @@ const MATCHES = {
   ],
   "6/21": [
     { time: "오전 02:00", teams: "네덜란드 vs 스웨덴", type: "" },
-    { time: "오전 05:00", teams: "독일 vs 코트디부아르", type: "shaded" },
+    { time: "오전 05:00", teams: "독일 vs 코트디부아르", type: "shaded-germany" },
     { time: "오전 09:00", teams: "에콰도르 vs 퀴라소", type: "" },
     { time: "오후 01:00", teams: "튀니지 vs 일본", type: "" }
   ],
@@ -398,11 +467,11 @@ const MATCHES = {
     { time: "오전 07:00", teams: "모로코 vs 아이티", type: "" },
     { time: "오전 07:00", teams: "스코틀랜드 vs 브라질", type: "" },
     { time: "오전 10:00", teams: "체코 vs 멕시코", type: "" },
-    { time: "오전 10:00", teams: "남아공 vs 한국", type: "shaded" }
+    { time: "오전 10:00", teams: "남아공 vs 한국", type: "shaded-korea" }
   ],
   "6/26": [
     { time: "오전 05:00", teams: "퀴라소 vs 코트디부아르", type: "" },
-    { time: "오전 05:00", teams: "에콰도르 vs 독일", type: "shaded" },
+    { time: "오전 05:00", teams: "에콰도르 vs 독일", type: "shaded-germany" },
     { time: "오전 08:00", teams: "일본 vs 스웨덴", type: "bold" },
     { time: "오전 08:00", teams: "튀니지 vs 네덜란드", type: "" },
     { time: "오전 11:00", teams: "튀르키예 vs 미국", type: "" }
@@ -422,82 +491,83 @@ const MATCHES = {
   ]
 };
 
-// 6/12 = 금요일(5번째, 0=일,1=월,...,5=금,6=토)
-// 달력 시작: 6/7(일)로 잡고 6/28(일) 포함 주까지
-// 실제로 달력 시작: 6/7(일) ~ 끝: 6/28(일) 포함 주 6/28(일)~7/4(토)
+const WEEKDAYS = ["일","월","화","수","목","금","토"];
 
+const weeks = [
+  [[6,7],[6,8],[6,9],[6,10],[6,11],[6,12],[6,13]],
+  [[6,14],[6,15],[6,16],[6,17],[6,18],[6,19],[6,20]],
+  [[6,21],[6,22],[6,23],[6,24],[6,25],[6,26],[6,27]],
+  [[6,28],[6,29],[6,30],[7,1],[7,2],[7,3],[7,4]]
+];
+
+function inRange(m, d) { return m === 6 && d >= 12 && d <= 28; }
+function key(m, d) { return m+"/"+d; }
+
+/* ── PC 달력 렌더 ── */
 function renderCalendar() {
   const body = document.querySelector('.cal-body');
   body.innerHTML = '';
-
-  // 6/7 = 일요일 (6/12 금요일 기준: 금=6/12, 목=6/11, 수=6/10, 화=6/9, 월=6/8, 일=6/7)
-  // 주: 6/7~6/13, 6/14~6/20, 6/21~6/27, 6/28~7/4
-
-  // weeks: 배열로 주별 날짜 정의
-  const weeks = [
-    // [월, 일] 형태
-    [[6,7],[6,8],[6,9],[6,10],[6,11],[6,12],[6,13]],
-    [[6,14],[6,15],[6,16],[6,17],[6,18],[6,19],[6,20]],
-    [[6,21],[6,22],[6,23],[6,24],[6,25],[6,26],[6,27]],
-    [[6,28],[6,29],[6,30],[7,1],[7,2],[7,3],[7,4]]
-  ];
-
-  // 일정 있는 날짜 범위: 6/12 ~ 6/28
-  const scheduleStart = { m: 6, d: 12 };
-  const scheduleEnd = { m: 6, d: 28 };
-
-  function inScheduleRange(m, d) {
-    if (m === 6 && d >= 12 && d <= 28) return true;
-    return false;
-  }
-
-  function getKey(m, d) { return `${m}/${d}`; }
-
   weeks.forEach(week => {
     const weekEl = document.createElement('div');
     weekEl.className = 'cal-week';
-
-    week.forEach(([m, d], dayIdx) => {
+    week.forEach(([m, d], di) => {
       const cell = document.createElement('div');
-      const isSunday = dayIdx === 0;
-      const isSaturday = dayIdx === 6;
-      const hasSchedule = inScheduleRange(m, d);
-      const key = getKey(m, d);
-      const matches = MATCHES[key] || [];
-
-      cell.className = 'cal-cell' +
-        (isSunday ? ' is-sunday' : '') +
-        (isSaturday ? ' is-saturday' : '') +
-        (!hasSchedule ? ' empty' : '');
-
-      // 날짜 헤더
+      cell.className = 'cal-cell' + (di===0?' is-sunday':'') + (di===6?' is-saturday':'') + (!inRange(m,d)?' empty':'');
       const dateEl = document.createElement('div');
       dateEl.className = 'cell-date';
-      const dateLabel = m === 7 ? `<span style="font-size:11px;font-weight:400;color:var(--text-muted)">7/</span>${d}` : `${d}`;
-      dateEl.innerHTML = dateLabel;
+      dateEl.innerHTML = m===7 ? `<span style="font-size:11px;font-weight:400;color:var(--text-muted)">7/</span>${d}` : `${d}`;
       cell.appendChild(dateEl);
-
-      // 경기 목록
-      if (matches.length > 0) {
-        const matchesEl = document.createElement('div');
-        matchesEl.className = 'matches';
-        matches.forEach(match => {
-          const m = document.createElement('div');
-          m.className = 'match' + (match.type ? ' ' + match.type : '');
-          m.innerHTML = `<span class="match-time">${match.time}</span><span class="match-teams">${match.teams}</span>`;
-          matchesEl.appendChild(m);
+      const matches = MATCHES[key(m,d)] || [];
+      if (matches.length) {
+        const wrap = document.createElement('div');
+        wrap.className = 'cal-matches';
+        matches.forEach(mt => {
+          const el = document.createElement('div');
+          el.className = 'match' + (mt.type ? ' '+mt.type : '');
+          el.innerHTML = `<span class="match-time">${mt.time}</span><span class="match-teams">${mt.teams}</span>`;
+          wrap.appendChild(el);
         });
-        cell.appendChild(matchesEl);
+        cell.appendChild(wrap);
       }
-
       weekEl.appendChild(cell);
     });
-
     body.appendChild(weekEl);
   });
 }
 
+/* ── 모바일 리스트 렌더 ── */
+function renderList() {
+  const container = document.getElementById('list-view');
+  container.innerHTML = '';
+  // 일정 있는 날짜만 순서대로
+  const dates = [];
+  weeks.forEach(week => week.forEach(([m,d],di) => {
+    if (inRange(m,d) && MATCHES[key(m,d)]) dates.push({m,d,di});
+  }));
+  dates.forEach(({m,d,di}) => {
+    const matches = MATCHES[key(m,d)];
+    const dayEl = document.createElement('div');
+    dayEl.className = 'list-day';
+    const isSun = di===0, isSat = di===6;
+    const dateClass = isSun ? 'sunday' : isSat ? 'saturday' : '';
+    dayEl.innerHTML = `
+      <div class="list-day-header">
+        <span class="list-day-date ${dateClass}">${m}월 ${d}일</span>
+        <span class="list-day-weekday">${WEEKDAYS[di]}요일</span>
+      </div>
+      <div class="list-matches">
+        ${matches.map(mt => `
+          <div class="list-match ${mt.type}">
+            <span class="match-time">${mt.time}</span>
+            <span class="match-teams">${mt.teams}</span>
+          </div>`).join('')}
+      </div>`;
+    container.appendChild(dayEl);
+  });
+}
+
 renderCalendar();
+renderList();
 </script>
 
 </body>
