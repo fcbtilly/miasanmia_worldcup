@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIFA 2026 북중미 월드컵 경기장 현황</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Barlow+Condensed:wght@400;600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --border: #e0ddd5;
+    --border-dark: #c8c4b8;
+    --text-primary: #1a1917;
+    --text-secondary: #6b6860;
+    --text-muted: #9e9b92;
+    --header-bg: #1a1917;
+    --accent: #1a3a6b;
+    --row-even: #faf9f6;
+    --country-canada: #f0f5e8;
+    --country-mexico: #e8f3d8;
+    --country-usa: #e6eef8;
+    --badge-canada: #4a7c2a;
+    --badge-mexico: #2a7c4a;
+    --badge-usa: #1a3a6b;
+    --highlight-bg: #fffbe6;
+    --highlight-border: #e8c840;
+  }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 32px 24px;
+  }
+
+  .page-header {
+    max-width: 1100px;
+    margin: 0 auto 28px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+  }
+
+  .page-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .page-title span { color: var(--accent); }
+
+  .page-sub {
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .back-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--header-bg);
+    color: #fff;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 4px;
+    letter-spacing: 0.03em;
+    white-space: nowrap;
+  }
+
+  .back-btn:hover { opacity: 0.85; }
+
+  .table-wrap {
+    max-width: 1100px;
+    margin: 0 auto;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--border-dark);
+    box-shadow: 0 2px 12px rgba(0,0,0,0.07);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    background: var(--surface);
+    table-layout: fixed;
+  }
+
+  colgroup col:nth-child(1) { width: 80px; }
+  colgroup col:nth-child(2) { width: 130px; }
+  colgroup col:nth-child(3) { width: 160px; }
+  colgroup col:nth-child(4) { width: auto; }
+  colgroup col:nth-child(5) { width: 90px; }
+  colgroup col:nth-child(6) { width: 170px; }
+
+  thead tr {
+    background: var(--header-bg);
+  }
+
+  thead th {
+    padding: 11px 14px;
+    text-align: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.06em;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+
+  thead th:last-child { border-right: none; }
+
+  tbody td {
+    padding: 9px 14px;
+    border-bottom: 1px solid var(--border);
+    border-right: 1px solid var(--border);
+    vertical-align: middle;
+    line-height: 1.4;
+  }
+
+  tbody td:last-child { border-right: none; }
+
+  tbody tr:last-child td { border-bottom: none; }
+
+  .country-cell {
+    text-align: center;
+    font-weight: 500;
+    font-size: 13px;
+  }
+
+  /* 국가별 색상 */
+  .country-canada { background: var(--country-canada); }
+  .country-mexico  { background: var(--country-mexico); }
+  .country-usa     { background: var(--country-usa); }
+
+  .country-badge {
+    display: inline-block;
+    padding: 3px 10px;
+    border-radius: 3px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+  }
+
+  .badge-canada { background: #d4e8b8; color: var(--badge-canada); }
+  .badge-mexico { background: #b8d98a; color: var(--badge-mexico); }
+  .badge-usa    { background: #c8d8f0; color: var(--badge-usa); }
+
+  .state-cell {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+
+  .city-cell {
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+
+  .stadium-cell {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+  }
+
+  .capacity-cell {
+    text-align: right;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+  }
+
+  .note-cell {
+    font-size: 11px;
+    color: var(--text-secondary);
+  }
+
+  /* 특별 경기장 강조 */
+  .is-special td { background: var(--highlight-bg) !important; }
+  .is-special .stadium-cell { color: #8a6800; }
+  .is-special .capacity-cell { color: #8a6800; }
+
+  .special-badge {
+    display: inline-block;
+    font-size: 10px;
+    padding: 1px 6px;
+    border-radius: 2px;
+    background: #fde68a;
+    color: #7c5700;
+    font-weight: 500;
+    margin-top: 3px;
+    white-space: nowrap;
+  }
+
+  tbody tr:hover td { background: #f5f3ee; }
+  tbody .is-special:hover td { background: #fff8d6 !important; }
+
+  .summary-bar {
+    max-width: 1100px;
+    margin: 14px auto 0;
+    display: flex;
+    gap: 20px;
+    font-size: 11px;
+    color: var(--text-muted);
+    align-items: center;
+  }
+
+  .summary-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .summary-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div>
+    <div class="page-title">FIFA 2026 북중미 <span>월드컵</span></div>
+    <div class="page-sub">경기장 현황 · 3개국 16개 경기장</div>
+  </div>
+  <div style="display:flex;gap:8px;">
+    <a href="groups.html" class="back-btn">⚽ 조편성 보기</a>
+    <a href="schedule_calendar.html" class="back-btn">← 일정표로 돌아가기</a>
+  </div>
+</div>
+
+<div class="table-wrap">
+  <table>
+    <colgroup>
+      <col><col><col><col><col><col>
+    </colgroup>
+    <thead>
+      <tr>
+        <th>국가</th>
+        <th>주</th>
+        <th>소재지</th>
+        <th>경기장</th>
+        <th>수용 인원</th>
+        <th>비고</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- 캐나다 -->
+      <tr>
+        <td class="country-cell country-canada" rowspan="2"><span class="country-badge badge-canada">캐나다</span></td>
+        <td class="state-cell">브리티시컬럼비아주</td>
+        <td class="city-cell">밴쿠버</td>
+        <td class="stadium-cell">BC 플레이스</td>
+        <td class="capacity-cell">54,000석</td>
+        <td class="note-cell"></td>
+      </tr>
+      <tr>
+        <td class="state-cell">온타리오</td>
+        <td class="city-cell">토론토</td>
+        <td class="stadium-cell">BMO 필드</td>
+        <td class="capacity-cell">30,000석</td>
+        <td class="note-cell"></td>
+      </tr>
+
+      <!-- 멕시코 -->
+      <tr>
+        <td class="country-cell country-mexico" rowspan="3"><span class="country-badge badge-mexico">멕시코</span></td>
+        <td class="state-cell">멕시코시티</td>
+        <td class="city-cell">멕시코시티</td>
+        <td class="stadium-cell">에스타디오 아스테카</td>
+        <td class="capacity-cell">87,523석</td>
+        <td class="note-cell"><span class="special-badge">개막전 개최 경기장</span></td>
+      </tr>
+      <tr>
+        <td class="state-cell">누에보레온</td>
+        <td class="city-cell">몬테레이 (과달루페)</td>
+        <td class="stadium-cell">에스타디오 BBVA</td>
+        <td class="capacity-cell">53,500석</td>
+        <td class="note-cell"></td>
+      </tr>
+      <tr>
+        <td class="state-cell">할리스코</td>
+        <td class="city-cell">과달라하라 (사포판)</td>
+        <td class="stadium-cell">에스타디오 아크론</td>
+        <td class="capacity-cell">46,232석</td>
+        <td class="note-cell"></td>
+      </tr>
+
+      <!-- 미국 -->
+      <tr>
+        <td class="country-cell country-usa" rowspan="11"><span class="country-badge badge-usa">미국</span></td>
+        <td class="state-cell">뉴욕/뉴저지</td>
+        <td class="city-cell">뉴욕 (뉴저지주)</td>
+        <td class="stadium-cell">메트라이프 스타디움</td>
+        <td class="capacity-cell">82,500석</td>
+        <td class="note-cell"><span class="special-badge">결승전 개최 경기장</span></td>
+      </tr>
+      <tr>
+        <td class="state-cell" rowspan="2">캘리포니아</td>
+        <td class="city-cell">로스앤젤레스</td>
+        <td class="stadium-cell">소파이 스타디움</td>
+        <td class="capacity-cell">70,240석</td>
+        <td class="note-cell">동구장</td>
+      </tr>
+      <tr>
+        <td class="city-cell">샌프란시스코 베이 에어리어</td>
+        <td class="stadium-cell">리바이스 스타디움</td>
+        <td class="capacity-cell">68,500석</td>
+        <td class="note-cell"></td>
+      </tr>
+      <tr>
+        <td class="state-cell" rowspan="2">텍사스</td>
+        <td class="city-cell">댈러스 (알링턴)</td>
+        <td class="stadium-cell">AT&amp;T 스타디움</td>
+        <td class="capacity-cell">80,000석</td>
+        <td class="note-cell">동구장 / 준결승전 개최 경기장</td>
+      </tr>
+      <tr>
+        <td class="city-cell">휴스턴</td>
+        <td class="stadium-cell">NRG 스타디움</td>
+        <td class="capacity-cell">72,220석</td>
+        <td class="note-cell">동구장</td>
+      </tr>
+      <tr>
+        <td class="state-cell">미주리</td>
+        <td class="city-cell">캔자스시티</td>
+        <td class="stadium-cell">애로헤드 스타디움</td>
+        <td class="capacity-cell">76,416석</td>
+        <td class="note-cell"></td>
+      </tr>
+      <tr>
+        <td class="state-cell">조지아</td>
+        <td class="city-cell">애틀랜타</td>
+        <td class="stadium-cell">메르세데스-벤츠 스타디움</td>
+        <td class="capacity-cell">71,000석</td>
+        <td class="note-cell">동구장 / 준결승전 개최 경기장</td>
+      </tr>
+      <tr>
+        <td class="state-cell">펜실베이니아</td>
+        <td class="city-cell">필라델피아</td>
+        <td class="stadium-cell">링컨 파이낸셜 필드</td>
+        <td class="capacity-cell">69,796석</td>
+        <td class="note-cell"></td>
+      </tr>
+      <tr>
+        <td class="state-cell">워싱턴</td>
+        <td class="city-cell">시애틀</td>
+        <td class="stadium-cell">루멘 필드</td>
+        <td class="capacity-cell">69,000석</td>
+        <td class="note-cell"></td>
+      </tr>
+      <tr>
+        <td class="state-cell">매사추세츠</td>
+        <td class="city-cell">보스턴 (폭스버러)</td>
+        <td class="stadium-cell">질레트 스타디움</td>
+        <td class="capacity-cell">65,878석</td>
+        <td class="note-cell"></td>
+      </tr>
+      <tr>
+        <td class="state-cell">플로리다</td>
+        <td class="city-cell">마이애미 (마이애미 가든시)</td>
+        <td class="stadium-cell">하드록 스타디움</td>
+        <td class="capacity-cell">64,767석</td>
+        <td class="note-cell"></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="summary-bar">
+  <div class="summary-item"><div class="summary-dot" style="background:#d4e8b8;"></div>캐나다 (2개소)</div>
+  <div class="summary-item"><div class="summary-dot" style="background:#b8d98a;"></div>멕시코 (3개소)</div>
+  <div class="summary-item"><div class="summary-dot" style="background:#c8d8f0;"></div>미국 (11개소)</div>
+</div>
+
+</body>
+</html>
