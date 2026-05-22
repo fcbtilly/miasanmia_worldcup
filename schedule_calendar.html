@@ -416,8 +416,7 @@
 </div>
 
 <div class="notice">
-  * 이 페이지는 여러 개의 심장을 가진 바바리안 걸들의 원활한 경기시청을 돕고자 제작되었습니다.<br>
-  * 주목도가 낮은 약팀 간의 경기는 제외하였습니다. (단, <span style="background:#fce0e0;color:#a02020;font-weight:500;padding:1px 5px;border-radius:3px;">찐조국</span>, <span style="background:#fdf6c0;color:#7a6400;font-weight:500;padding:1px 5px;border-radius:3px;">짭조국</span>, <span style="background:#b8e4f9;color:#0a527a;font-weight:500;padding:1px 5px;border-radius:3px;">짭짭조국1</span>, <span style="background:#c8d4ee;color:#1a2d6b;font-weight:500;padding:1px 5px;border-radius:3px;">짭짭조국2</span>과 같은 조의 경기는 전력분석이 필요하기 때문에 포함함.)
+  * 이 페이지는 여러 개의 심장을 가진 바바리안 걸들의 원활한 경기시청을 돕고자 제작되었습니다.
 </div>
 
 <!-- PC 달력 -->
@@ -443,8 +442,14 @@ const MATCHES = {
     { time: "오전 04:00", teams: "멕시코 vs 남아공", type: "" },
     { time: "오전 11:00", teams: "한국 vs 체코", type: "shaded-korea" }
   ],
+  "6/13": [
+    { time: "오전 04:00", teams: "캐나다 vs 보스니아 헤르체고비나", type: "" },
+    { time: "오전 10:00", teams: "미국 vs 파라과이", type: "" }
+  ],
   "6/14": [
+    { time: "오전 04:00", teams: "카타르 vs 스위스", type: "" },
     { time: "오전 07:00", teams: "브라질 vs 모로코", type: "bold" },
+    { time: "오전 10:00", teams: "아이티 vs 스코틀랜드", type: "" },
     { time: "오후 01:00", teams: "호주 vs 튀르키예", type: "" }
   ],
   "6/15": [
@@ -456,7 +461,8 @@ const MATCHES = {
   "6/16": [
     { time: "오전 01:00", teams: "스페인 vs 카보베르데", type: "" },
     { time: "오전 04:00", teams: "벨기에 vs 이집트", type: "bold" },
-    { time: "오전 07:00", teams: "사우디 vs 우루과이", type: "" }
+    { time: "오전 07:00", teams: "사우디 vs 우루과이", type: "" },
+    { time: "오전 10:00", teams: "이란 vs 뉴질랜드", type: "" }
   ],
   "6/17": [
     { time: "오전 04:00", teams: "프랑스 vs 세네갈", type: "shaded-france" },
@@ -467,14 +473,17 @@ const MATCHES = {
   "6/18": [
     { time: "오전 02:00", teams: "포르투갈 vs 콩고", type: "" },
     { time: "오전 05:00", teams: "잉글랜드 vs 크로아티아", type: "shaded-england" },
+    { time: "오전 08:00", teams: "가나 vs 파나마", type: "" },
     { time: "오전 11:00", teams: "우즈벡 vs 콜롬비아", type: "" }
   ],
   "6/19": [
     { time: "오전 01:00", teams: "체코 vs 남아공", type: "" },
     { time: "오전 04:00", teams: "스위스 vs 보스니아", type: "" },
+    { time: "오전 07:00", teams: "캐나다 vs 카타르", type: "" },
     { time: "오전 10:00", teams: "멕시코 vs 한국", type: "shaded-korea" }
   ],
   "6/20": [
+    { time: "오전 04:00", teams: "미국 vs 호주", type: "" },
     { time: "오전 07:00", teams: "스코틀랜드 vs 모로코", type: "" },
     { time: "오전 09:30", teams: "브라질 vs 아이티", type: "" },
     { time: "오후 12:00", teams: "튀르키예 vs 파라과이", type: "" }
@@ -488,12 +497,14 @@ const MATCHES = {
   "6/22": [
     { time: "오전 01:00", teams: "스페인 vs 사우디", type: "" },
     { time: "오전 04:00", teams: "벨기에 vs 이란", type: "" },
-    { time: "오전 07:00", teams: "우루과이 vs 카보베르데", type: "" }
+    { time: "오전 07:00", teams: "우루과이 vs 카보베르데", type: "" },
+    { time: "오전 10:00", teams: "뉴질랜드 vs 이집트", type: "" }
   ],
   "6/23": [
     { time: "오전 02:00", teams: "아르헨티나 vs 오스트리아", type: "bold" },
     { time: "오전 06:00", teams: "프랑스 vs 이라크", type: "shaded-france" },
-    { time: "오전 09:00", teams: "노르웨이 vs 세네갈", type: "" }
+    { time: "오전 09:00", teams: "노르웨이 vs 세네갈", type: "" },
+    { time: "오후 12:00", teams: "요르단 vs 알제리", type: "" }
   ],
   "6/24": [
     { time: "오전 02:00", teams: "포르투갈 vs 우즈벡", type: "" },
@@ -503,6 +514,7 @@ const MATCHES = {
   ],
   "6/25": [
     { time: "오전 04:00", teams: "스위스 vs 캐나다", type: "" },
+    { time: "오전 04:00", teams: "보스니아 헤르체고비나 vs 카타르", type: "" },
     { time: "오전 07:00", teams: "모로코 vs 아이티", type: "" },
     { time: "오전 07:00", teams: "스코틀랜드 vs 브라질", type: "" },
     { time: "오전 10:00", teams: "체코 vs 멕시코", type: "" },
@@ -513,18 +525,22 @@ const MATCHES = {
     { time: "오전 05:00", teams: "에콰도르 vs 독일", type: "shaded-germany" },
     { time: "오전 08:00", teams: "일본 vs 스웨덴", type: "bold" },
     { time: "오전 08:00", teams: "튀니지 vs 네덜란드", type: "" },
-    { time: "오전 11:00", teams: "튀르키예 vs 미국", type: "" }
+    { time: "오전 11:00", teams: "튀르키예 vs 미국", type: "" },
+    { time: "오전 11:00", teams: "파라과이 vs 호주", type: "" }
   ],
   "6/27": [
     { time: "오전 04:00", teams: "노르웨이 vs 프랑스", type: "shaded-france" },
     { time: "오전 04:00", teams: "세네갈 vs 이라크", type: "" },
     { time: "오전 09:00", teams: "우루과이 vs 스페인", type: "bold" },
-    { time: "오후 12:00", teams: "뉴질랜드 vs 벨기에", type: "" }
+    { time: "오전 09:00", teams: "카보베르데 vs 사우디", type: "" },
+    { time: "오후 12:00", teams: "뉴질랜드 vs 벨기에", type: "" },
+    { time: "오후 12:00", teams: "이집트 vs 이란", type: "" }
   ],
   "6/28": [
     { time: "오전 06:00", teams: "크로아티아 vs 가나", type: "" },
     { time: "오전 06:00", teams: "파나마 vs 잉글랜드", type: "shaded-england" },
     { time: "오전 08:30", teams: "콜롬비아 vs 포르투갈", type: "bold" },
+    { time: "오전 08:30", teams: "콩고민주공화국 vs 우즈벡", type: "" },
     { time: "오전 11:00", teams: "알제리 vs 오스트리아", type: "" },
     { time: "오전 11:00", teams: "요르단 vs 아르헨티나", type: "" }
   ]
