@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIFA 2026 북중미 월드컵 선수 명단</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Barlow+Condensed:wght@400;600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --border: #e0ddd5;
+    --border-dark: #c8c4b8;
+    --text-primary: #1a1917;
+    --text-secondary: #6b6860;
+    --text-muted: #9e9b92;
+    --header-bg: #1a1917;
+    --accent: #1a3a6b;
+
+    /* 팀 컬러 */
+    --germany-bg: #fdf6c0;
+    --germany-border: #e0cc50;
+    --germany-text: #7a6400;
+    --germany-header: #c8a800;
+
+    --france-bg: #c8d4ee;
+    --france-border: #7a8fc8;
+    --france-text: #1a2d6b;
+
+    --england-bg: #b8e4f9;
+    --england-border: #5bbce4;
+    --england-text: #0a527a;
+
+    --korea-bg: #fce0e0;
+    --korea-border: #e8a0a0;
+    --korea-text: #a02020;
+  }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 32px 24px;
+  }
+
+  /* ── 헤더 ── */
+  .page-header {
+    max-width: 1100px;
+    margin: 0 auto 28px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .page-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .page-title span { color: var(--accent); }
+
+  .page-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .nav-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--header-bg);
+    color: #fff;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* ── 팀 탭 ── */
+  .team-tabs {
+    max-width: 1100px;
+    margin: 0 auto 20px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .team-tab {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 7px 18px;
+    border-radius: 4px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    letter-spacing: 0.04em;
+    transition: all 0.15s ease;
+    background: var(--surface);
+    color: var(--text-muted);
+    border-color: var(--border-dark);
+  }
+
+  .team-tab:hover { color: var(--text-primary); border-color: var(--border-dark); }
+
+  .team-tab.active-germany {
+    background: var(--germany-bg);
+    color: var(--germany-text);
+    border-color: var(--border-dark);
+  }
+
+  .team-tab.inactive-france,
+  .team-tab.inactive-england,
+  .team-tab.inactive-korea {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
+  .team-tab.inactive-france:hover  { color: var(--text-muted); border-color: var(--border-dark); }
+  .team-tab.inactive-england:hover { color: var(--text-muted); border-color: var(--border-dark); }
+  .team-tab.inactive-korea:hover   { color: var(--text-muted); border-color: var(--border-dark); }
+
+  .coming-badge {
+    font-size: 9px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: 400;
+    letter-spacing: 0;
+    vertical-align: middle;
+    margin-left: 4px;
+    color: var(--text-muted);
+  }
+
+  /* ── 팀별 포지션 헤더 색상 ── */
+  .team-germany .position-header { border-bottom-color: var(--germany-border); }
+  .team-germany .position-badge  { background: var(--germany-bg); color: var(--germany-text); border-color: var(--germany-border); }
+  .team-germany .player-card:hover { border-color: var(--germany-border); box-shadow: 0 2px 8px rgba(200,168,0,0.12); }
+  .team-germany .player-name-link:hover { color: var(--germany-text); }
+  .team-germany .age-chip { color: var(--germany-text); }
+
+  .team-korea .position-header { border-bottom-color: var(--korea-border); }
+  .team-korea .position-badge  { background: var(--korea-bg); color: var(--korea-text); border-color: var(--korea-border); }
+  .team-korea .player-card:hover { border-color: var(--korea-border); box-shadow: 0 2px 8px rgba(232,160,160,0.18); }
+  .team-korea .player-name-link:hover { color: var(--korea-text); }
+  .team-korea .age-chip { color: var(--korea-text); }
+
+  .team-france .position-header { border-bottom-color: var(--france-border); }
+  .team-france .position-badge  { background: var(--france-bg); color: var(--france-text); border-color: var(--france-border); }
+  .team-france .player-card:hover { border-color: var(--france-border); box-shadow: 0 2px 8px rgba(122,143,200,0.15); }
+  .team-france .player-name-link:hover { color: var(--france-text); }
+  .team-france .age-chip { color: var(--france-text); }
+
+  /* ── 포지션 섹션 ── */
+  .squad-wrapper { max-width: 1100px; margin: 0 auto; display: none; }
+  .squad-wrapper.active { display: block; }
+
+  .position-section { margin-bottom: 24px; }
+
+  .position-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    padding-bottom: 7px;
+    border-bottom: 2px solid var(--border-dark);
+  }
+
+  .position-badge {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 3px;
+    background: var(--bg);
+    color: var(--text-secondary);
+    border: 1px solid var(--border-dark);
+  }
+
+  .position-count {
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* ── 선수 카드 그리드 ── */
+  .players-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
+  }
+
+  .player-card {
+    background: var(--surface);
+    border: 1px solid var(--border-dark);
+    border-radius: 5px;
+    padding: 11px 13px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+
+  .player-card:hover {
+    border-color: var(--border-dark);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+  }
+
+  .player-name-link {
+    font-size: 13.5px;
+    font-weight: 700;
+    color: var(--text-primary);
+    text-decoration: none;
+    line-height: 1.2;
+    transition: color 0.12s;
+  }
+
+  .player-name-link:hover { color: var(--accent); text-decoration: underline; }
+
+  .player-club {
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 400;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .player-meta {
+    display: flex;
+    gap: 8px;
+    margin-top: 2px;
+  }
+
+  .meta-chip {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-muted);
+    letter-spacing: 0.02em;
+  }
+
+  .meta-chip span {
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--text-muted);
+    margin-right: 1px;
+    font-family: 'Noto Sans KR', sans-serif;
+  }
+
+  .meta-chip.age-chip { color: var(--text-secondary); }
+
+  /* ── 요약 바 ── */
+  .summary-bar {
+    max-width: 1100px;
+    margin: 8px auto 0;
+    font-size: 11px;
+    color: var(--text-muted);
+  }
+
+  /* ── 모바일 ── */
+  @media (max-width: 700px) {
+    body { padding: 16px 14px; }
+    .page-title { font-size: 26px; }
+    .players-grid { grid-template-columns: repeat(2, 1fr); gap: 7px; }
+    .player-card { padding: 9px 11px; }
+    .player-name-link { font-size: 12.5px; }
+    .player-club { font-size: 10.5px; }
+  }
+
+  @media (min-width: 701px) and (max-width: 960px) {
+    .players-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div>
+    <div class="page-title">FIFA 2026 북중미 <span>월드컵</span></div>
+    <div class="page-sub">선수 명단 · 국가별 엔트리</div>
+  </div>
+  <div class="nav-btns">
+    <a href="groups.html" class="nav-btn">⚽ 조편성 보기</a>
+    <a href="stadiums.html" class="nav-btn">🏟 경기장 현황</a>
+    <a href="schedule_calendar.html" class="nav-btn">← 일정표로 돌아가기</a>
+  </div>
+</div>
+
+<!-- 팀 탭 -->
+<div class="team-tabs">
+  <div class="team-tab active-germany" data-team="germany">🇩🇪 독일</div>
+  <div class="team-tab" data-team="france" style="background:var(--france-bg);color:var(--france-text);border-color:var(--france-border);">🇫🇷 프랑스</div>
+  <div class="team-tab inactive-england">🏴󠁧󠁢󠁥󠁮󠁧󠁿 잉글랜드<span class="coming-badge">준비 중</span></div>
+  <div class="team-tab" data-team="korea" style="background:var(--korea-bg);color:var(--korea-text);border-color:var(--korea-border);">🇰🇷 대한민국</div>
+</div>
+
+<!-- 독일 명단 -->
+<div class="squad-wrapper team-germany active" id="squad-germany">
+
+  <div class="position-section">
+    <div class="position-header">
+      <span class="position-badge">GK · 골키퍼</span>
+      <span class="position-count"></span>
+    </div>
+    <div class="players-grid" id="de-gk-grid"></div>
+  </div>
+
+  <div class="position-section">
+    <div class="position-header">
+      <span class="position-badge">DM/DF · 수비</span>
+      <span class="position-count"></span>
+    </div>
+    <div class="players-grid" id="de-df-grid"></div>
+  </div>
+
+  <div class="position-section">
+    <div class="position-header">
+      <span class="position-badge">AM/FW · 공격</span>
+      <span class="position-count"></span>
+    </div>
+    <div class="players-grid" id="de-fw-grid"></div>
+  </div>
+
+</div>
+
+<!-- 프랑스 명단 -->
+<div class="squad-wrapper team-france" id="squad-france">
+
+  <div class="position-section">
+    <div class="position-header">
+      <span class="position-badge">GK · 골키퍼</span>
+      <span class="position-count"></span>
+    </div>
+    <div class="players-grid" id="fr-gk-grid"></div>
+  </div>
+
+  <div class="position-section">
+    <div class="position-header">
+      <span class="position-badge">DF · 수비수</span>
+      <span class="position-count"></span>
+    </div>
+    <div class="players-grid" id="fr-df-grid"></div>
+  </div>
+
+  <div class="position-section">
+    <div class="position-header">
+      <span class="position-badge">MF · 미드필더</span>
+      <span class="position-count"></span>
+    </div>
+    <div class="players-grid" id="fr-mf-grid"></div>
+  </div>
+
+  <div class="position-section">
+    <div class="position-header">
+      <span class="position-badge">FW · 공격수</span>
+      <span class="position-count"></span>
+    </div>
+    <div class="players-grid" id="fr-fw-grid"></div>
+  </div>
+
+</div>
+
+<!-- 대한민국 명단 -->
+<div class="squad-wrapper team-korea" id="squad-korea">
+
+  <div class="position-section">
+    <div class="position-header">
+      <span class="position-badge">GK · 골키퍼</span>
+      <span class="position-count"></span>
+    </div>
+    <div class="players-grid" id="kr-gk-grid"></div>
+  </div>
+
+  <div class="position-section">
+    <div class="position-header">
+      <span class="position-badge">DF · 수비수</span>
+      <span class="position-count"></span>
+    </div>
+    <div class="players-grid" id="kr-df-grid"></div>
+  </div>
+
+  <div class="position-section">
+    <div class="position-header">
+      <span class="position-badge">MF · 미드필더</span>
+      <span class="position-count"></span>
+    </div>
+    <div class="players-grid" id="kr-mf-grid"></div>
+  </div>
+
+  <div class="position-section">
+    <div class="position-header">
+      <span class="position-badge">FW · 공격수</span>
+      <span class="position-count"></span>
+    </div>
+    <div class="players-grid" id="kr-fw-grid"></div>
+  </div>
+
+</div>
+
+<div class="summary-bar">* 나이는 2026년 5월 기준 · 키 단위 cm · 이름 클릭 시 네이버 검색으로 이동</div>
+
+<script>
+const GERMANY = {
+  gk: [
+    { name: "마누엘 노이어",      club: "바이에른 뮌헨",                  age: 40, height: 193 },
+    { name: "올리버 바우만",      club: "TSG 호펜하임",                    age: 35, height: 187 },
+    { name: "알렉산더 뉘벨",      club: "VfB 슈투트가르트",               age: 29, height: 193 },
+  ],
+  df: [
+    { name: "발데마르 안톤",        club: "보루시아 도르트문트",            age: 29, height: 189 },
+    { name: "나다니엘 브라운",      club: "아인트라흐트 프랑크푸르트",     age: 22, height: 176 },
+    { name: "파스칼 그로스",        club: "브라이턴 & 호브 알비온",        age: 34, height: 181 },
+    { name: "요슈아 키미히",        club: "바이에른 뮌헨",                  age: 31, height: 177 },
+    { name: "펠릭스 은메차",        club: "보루시아 도르트문트",            age: 25, height: 186 },
+    { name: "알렉산다르 파블로비치", club: "바이에른 뮌헨",                 age: 22, height: 189 },
+    { name: "다비드 라움",          club: "RB 라이프치히",                  age: 28, height: 180 },
+    { name: "안토니오 뤼디거",      club: "레알 마드리드",                  age: 33, height: 190 },
+    { name: "니코 슐로터벡",        club: "보루시아 도르트문트",            age: 26, height: 191 },
+    { name: "안젤로 슈틸러",        club: "VfB 슈투트가르트",               age: 25, height: 183 },
+    { name: "요나단 타",            club: "바이에른 뮌헨",                  age: 30, height: 195 },
+    { name: "말릭 티아우",          club: "뉴캐슬 유나이티드",              age: 24, height: 191 },
+  ],
+  fw: [
+    { name: "나딤 아미리",          club: "FSV 마인츠 05",                  age: 28, height: 177 },
+    { name: "막시밀리안 바이어",    club: "보루시아 도르트문트",            age: 22, height: 184 },
+    { name: "레온 고레츠카",        club: "바이에른 뮌헨",                  age: 31, height: 189 },
+    { name: "카이 하베르츠",        club: "아스날",                         age: 26, height: 193 },
+    { name: "레나르트 칼",          club: "바이에른 뮌헨",                  age: 18, height: 168 },
+    { name: "제이미 레벨링",        club: "VfB 슈투트가르트",               age: 24, height: 186 },
+    { name: "자말 무시알라",        club: "바이에른 뮌헨",                  age: 23, height: 186 },
+    { name: "르로이 사네",          club: "갈라타사라이",                   age: 30, height: 183 },
+    { name: "데니즈 운다브",        club: "VfB 슈투트가르트",               age: 29, height: 179 },
+    { name: "플로리안 비르츠",      club: "리버풀",                         age: 22, height: 176 },
+    { name: "닉 볼테마데",          club: "뉴캐슬 유나이티드",              age: 23, height: 200 },
+  ]
+};
+
+const FRANCE = {
+  gk: [
+    { name: "마이크 메냥",          club: "AC 밀란",                        age: 29, height: 191 },
+    { name: "로뱅 리세르",          club: "RC 랑스",                        age: 21, height: 192 },
+    { name: "브리스 삼바",          club: "스타드 렌",                      age: 31, height: 194 },
+  ],
+  df: [
+    { name: "뤼카 디뉴",            club: "아스톤 빌라",                    age: 32, height: 180 },
+    { name: "말로 귀스토",          club: "첼시",                           age: 23, height: 179 },
+    { name: "뤼카 에르난데스",      club: "파리 생제르맹",                  age: 30, height: 184 },
+    { name: "테오 에르난데스",      club: "알-힐랄",                        age: 28, height: 184 },
+    { name: "이브라히마 코나테",    club: "리버풀",                         age: 27, height: 194 },
+    { name: "쥘 쿤데",              club: "FC 바르셀로나",                  age: 27, height: 177 },
+    { name: "막상스 라크루아",      club: "크리스털 팰리스",                age: 26, height: 191 },
+    { name: "윌리엄 살리바",        club: "아스날",                         age: 25, height: 192 },
+    { name: "다요 우파메카노",      club: "바이에른 뮌헨",                  age: 27, height: 186 },
+  ],
+  mf: [
+    { name: "은골로 캉테",          club: "페네르바체",                     age: 35, height: 168 },
+    { name: "마누 코네",            club: "AS 로마",                        age: 24, height: 185 },
+    { name: "아드리앙 라비오",      club: "AC 밀란",                        age: 31, height: 188 },
+    { name: "오렐리앙 추아메니",    club: "레알 마드리드",                  age: 26, height: 188 },
+    { name: "워렌 자이르에메리",    club: "파리 생제르맹",                  age: 20, height: 176 },
+  ],
+  fw: [
+    { name: "마그네스 아클리우슈",  club: "AS 모나코",                      age: 24, height: 176 },
+    { name: "브래들리 바르콜라",    club: "파리 생제르맹",                  age: 23, height: 180 },
+    { name: "라얀 셰르키",          club: "맨체스터 시티",                  age: 22, height: 172 },
+    { name: "우스만 뎀벨레",        club: "파리 생제르맹",                  age: 29, height: 178 },
+    { name: "데지레 두에",          club: "파리 생제르맹",                  age: 21, height: 179 },
+    { name: "장필리프 마테타",      club: "크리스털 팰리스",                age: 28, height: 194 },
+    { name: "킬리안 음바페",        club: "레알 마드리드",                  age: 27, height: 180 },
+    { name: "마이클 올리세",        club: "바이에른 뮌헨",                  age: 24, height: 179 },
+    { name: "마르쿠스 튀랑",        club: "인테르 밀란",                    age: 28, height: 191 },
+  ]
+};
+
+function naverSearch(name) {
+  return `https://search.naver.com/search.naver?query=${encodeURIComponent(name)}`;
+}
+
+function renderGrid(gridId, players) {
+  const grid = document.getElementById(gridId);
+  if (!grid) return;
+  grid.innerHTML = '';
+  players.forEach(p => {
+    const card = document.createElement('div');
+    card.className = 'player-card';
+    card.innerHTML = `
+      <a class="player-name-link" href="${naverSearch(p.name)}" target="_blank" rel="noopener">${p.name}</a>
+      <div class="player-club">${p.club}</div>
+      <div class="player-meta">
+        <div class="meta-chip age-chip"><span>나이</span>${p.age}</div>
+        <div class="meta-chip"><span>키</span>${p.height}cm</div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+  const section = grid.closest('.position-section');
+  const countEl = section && section.querySelector('.position-count');
+  if (countEl) countEl.textContent = players.length + '명';
+}
+
+// 독일
+renderGrid('de-gk-grid', GERMANY.gk);
+renderGrid('de-df-grid', GERMANY.df);
+renderGrid('de-fw-grid', GERMANY.fw);
+
+// 프랑스
+renderGrid('fr-gk-grid', FRANCE.gk);
+renderGrid('fr-df-grid', FRANCE.df);
+renderGrid('fr-mf-grid', FRANCE.mf);
+renderGrid('fr-fw-grid', FRANCE.fw);
+
+// 대한민국
+const KOREA = {
+  gk: [
+    { name: "김승규",          club: "FC 도쿄",                   age: 34, height: 189 },
+    { name: "송범근",          club: "전북 현대",                  age: 31, height: 189 },
+    { name: "조현우",          club: "울산 HD",                    age: 34, height: 189 },
+  ],
+  df: [
+    { name: "김문환",          club: "대전 하나시티즌",            age: 29, height: 177 },
+    { name: "김민재",          club: "바이에른 뮌헨",              age: 29, height: 190 },
+    { name: "김태현",          club: "가시마 앤틀러스",            age: 24, height: 186 },
+    { name: "박진섭",          club: "저장 FC",                    age: 29, height: 186 },
+    { name: "설영우",          club: "츠르베나 즈베즈다",          age: 27, height: 184 },
+    { name: "옌스 카스트로프",  club: "보루시아 묀헨글라트바흐",   age: 25, height: 184 },
+    { name: "이기혁",          club: "강원 FC",                    age: 25, height: 186 },
+    { name: "이태석",          club: "FK 아우스트리아 빈",         age: 22, height: 187 },
+    { name: "이한범",          club: "FC 미트윌란",                age: 25, height: 183 },
+    { name: "조유민",          club: "샤르자 FC",                  age: 28, height: 185 },
+  ],
+  mf: [
+    { name: "김진규",          club: "전북 현대",                  age: 26, height: 177 },
+    { name: "배준호",          club: "스토크 시티",                age: 22, height: 180 },
+    { name: "백승호",          club: "버밍엄 시티",                age: 27, height: 176 },
+    { name: "양현준",          club: "셀틱 FC",                    age: 24, height: 183 },
+    { name: "엄지성",          club: "스완지 시티",                age: 23, height: 177 },
+    { name: "이강인",          club: "파리 생제르맹",              age: 23, height: 173 },
+    { name: "이동경",          club: "울산 HD",                    age: 27, height: 177 },
+    { name: "이재성",          club: "FSV 마인츠 05",              age: 32, height: 177 },
+    { name: "황인범",          club: "페예노르트",                 age: 29, height: 177 },
+    { name: "황희찬",          club: "울버햄튼 원더러스",          age: 29, height: 177 },
+  ],
+  fw: [
+    { name: "손흥민",          club: "LA FC",                      age: 33, height: 183 },
+    { name: "오현규",          club: "베식타시",                   age: 24, height: 180 },
+    { name: "조규성",          club: "FC 미트윌란",                age: 26, height: 193 },
+  ]
+};
+
+renderGrid('kr-gk-grid', KOREA.gk);
+renderGrid('kr-df-grid', KOREA.df);
+renderGrid('kr-mf-grid', KOREA.mf);
+renderGrid('kr-fw-grid', KOREA.fw);
+
+// 탭 전환
+document.querySelectorAll('.team-tab[data-team]').forEach(tab => {
+  tab.addEventListener('click', () => {
+    const team = tab.dataset.team;
+    // 모든 active 클래스 제거
+    document.querySelectorAll('.team-tab[data-team]').forEach(t => {
+      t.classList.remove('active-germany', 'active-france', 'active-korea');
+    });
+    tab.classList.add('active-' + team);
+    // 섹션 표시
+    document.querySelectorAll('.squad-wrapper').forEach(w => w.classList.remove('active'));
+    document.getElementById('squad-' + team).classList.add('active');
+  });
+});
+</script>
+
+</body>
+</html>
