@@ -132,6 +132,12 @@
     border-color: var(--france-border);
   }
 
+  .team-tab.active-england {
+    background: var(--england-bg);
+    color: var(--england-text);
+    border-color: var(--england-border);
+  }
+
   .team-tab.active-korea {
     background: var(--korea-bg);
     color: var(--korea-text);
@@ -171,6 +177,12 @@
   .team-korea .player-card:hover { border-color: var(--korea-border); box-shadow: 0 2px 8px rgba(232,160,160,0.18); }
   .team-korea .player-name-link:hover { color: var(--korea-text); }
   .team-korea .age-chip { color: var(--korea-text); }
+
+  .team-england .position-header { border-bottom-color: var(--england-border); }
+  .team-england .position-badge  { background: var(--england-bg); color: var(--england-text); border-color: var(--england-border); }
+  .team-england .player-card:hover { border-color: var(--england-border); box-shadow: 0 2px 8px rgba(91,188,228,0.18); }
+  .team-england .player-name-link:hover { color: var(--england-text); }
+  .team-england .age-chip { color: var(--england-text); }
 
   .team-france .position-header { border-bottom-color: var(--france-border); }
   .team-france .position-badge  { background: var(--france-bg); color: var(--france-text); border-color: var(--france-border); }
@@ -318,7 +330,7 @@
 <div class="team-tabs">
   <div class="team-tab active-germany" data-team="germany">🇩🇪 독일</div>
   <div class="team-tab" data-team="france">🇫🇷 프랑스</div>
-  <div class="team-tab inactive-england">🏴󠁧󠁢󠁥󠁮󠁧󠁿 잉글랜드<span class="coming-badge">준비 중</span></div>
+  <div class="team-tab" data-team="england">🏴󠁧󠁢󠁥󠁮󠁧󠁿 잉글랜드</div>
   <div class="team-tab" data-team="korea">🇰🇷 대한민국</div>
 </div>
 
@@ -384,6 +396,43 @@
       <span class="position-count"></span>
     </div>
     <div class="players-grid" id="fr-fw-grid"></div>
+  </div>
+
+</div>
+
+<!-- 잉글랜드 명단 -->
+<div class="squad-wrapper team-england" id="squad-england">
+
+  <div class="position-section">
+    <div class="position-header">
+      <span class="position-badge">GK · 골키퍼</span>
+      <span class="position-count"></span>
+    </div>
+    <div class="players-grid" id="en-gk-grid"></div>
+  </div>
+
+  <div class="position-section">
+    <div class="position-header">
+      <span class="position-badge">DF · 수비수</span>
+      <span class="position-count"></span>
+    </div>
+    <div class="players-grid" id="en-df-grid"></div>
+  </div>
+
+  <div class="position-section">
+    <div class="position-header">
+      <span class="position-badge">MF · 미드필더</span>
+      <span class="position-count"></span>
+    </div>
+    <div class="players-grid" id="en-mf-grid"></div>
+  </div>
+
+  <div class="position-section">
+    <div class="position-header">
+      <span class="position-badge">FW · 공격수</span>
+      <span class="position-count"></span>
+    </div>
+    <div class="players-grid" id="en-fw-grid"></div>
   </div>
 
 </div>
@@ -537,6 +586,49 @@ renderGrid('fr-df-grid', FRANCE.df);
 renderGrid('fr-mf-grid', FRANCE.mf);
 renderGrid('fr-fw-grid', FRANCE.fw);
 
+// 잉글랜드
+const ENGLAND = {
+  gk: [
+    { name: "조던 픽포드",    club: "에버턴",              age: 31, height: 185 },
+    { name: "딘 핸더슨",      club: "크리스털 팰리스",     age: 28, height: 191 },
+    { name: "제임스 트래포드", club: "맨체스터 시티",      age: 23, height: 196 },
+  ],
+  df: [
+    { name: "리스 제임스",    club: "첼시",                age: 26, height: 180 },
+    { name: "티노 리브라멘토", club: "뉴캐슬 유나이티드",  age: 23, height: 175 },
+    { name: "마크 게히",      club: "맨체스터 시티",       age: 25, height: 182 },
+    { name: "에즈리 콘사",    club: "아스톤 빌라",         age: 28, height: 182 },
+    { name: "존 스톤스",      club: "맨체스터 시티",       age: 31, height: 188 },
+    { name: "자렐 콴사",      club: "바이어 레버쿠젠",     age: 23, height: 190 },
+    { name: "니코 오라일리",  club: "맨체스터 시티",       age: 20, height: 185 },
+    { name: "댄 번",          club: "뉴캐슬 유나이티드",   age: 33, height: 193 },
+    { name: "제드 스펜스",    club: "토트넘 홋스퍼",       age: 25, height: 178 },
+  ],
+  mf: [
+    { name: "데클란 라이스",  club: "아스날",              age: 26, height: 185 },
+    { name: "엘리엇 앤더슨",  club: "노팅엄 포레스트",     age: 22, height: 182 },
+    { name: "주드 벨링엄",    club: "레알 마드리드",       age: 21, height: 186 },
+    { name: "조던 헨더슨",    club: "브렌트포드",          age: 35, height: 182 },
+    { name: "모건 로저스",    club: "아스톤 빌라",         age: 22, height: 186 },
+    { name: "코비 마이누",    club: "맨체스터 유나이티드", age: 20, height: 174 },
+  ],
+  fw: [
+    { name: "해리 케인",      club: "바이에른 뮌헨",       age: 31, height: 188 },
+    { name: "아이반 토니",    club: "알-이티하드",         age: 29, height: 185 },
+    { name: "올리 왓킨스",    club: "아스톤 빌라",         age: 30, height: 180 },
+    { name: "부카요 사카",    club: "아스날",              age: 23, height: 178 },
+    { name: "노니 마두에케",  club: "첼시",                age: 23, height: 174 },
+    { name: "마커스 래시포드", club: "바르셀로나 (임대)",  age: 28, height: 180 },
+    { name: "앤서니 고든",    club: "뉴캐슬 유나이티드",   age: 24, height: 178 },
+    { name: "에베레치 에제",  club: "아스날",              age: 26, height: 182 },
+  ]
+};
+
+renderGrid('en-gk-grid', ENGLAND.gk);
+renderGrid('en-df-grid', ENGLAND.df);
+renderGrid('en-mf-grid', ENGLAND.mf);
+renderGrid('en-fw-grid', ENGLAND.fw);
+
 // 대한민국
 const KOREA = {
   gk: [
@@ -586,7 +678,7 @@ document.querySelectorAll('.team-tab[data-team]').forEach(tab => {
     const team = tab.dataset.team;
     // 모든 active 클래스 제거
     document.querySelectorAll('.team-tab[data-team]').forEach(t => {
-      t.classList.remove('active-germany', 'active-france', 'active-korea');
+      t.classList.remove('active-germany', 'active-france', 'active-england', 'active-korea');
     });
     tab.classList.add('active-' + team);
     // 섹션 표시
