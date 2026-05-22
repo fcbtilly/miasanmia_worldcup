@@ -289,12 +289,71 @@
 
   .meta-chip.age-chip { color: var(--text-secondary); }
 
-  /* ── 요약 바 ── */
+  /* ── 안내 문구 ── */
   .summary-bar {
     max-width: 1100px;
-    margin: 8px auto 0;
+    margin: 0 auto 14px;
     font-size: 11px;
     color: var(--text-muted);
+    letter-spacing: 0.03em;
+  }
+
+  /* ── 클럽 승선 현황 ── */
+  .club-stats {
+    max-width: 1100px;
+    margin: 28px auto 0;
+    border-top: 2px solid var(--border-dark);
+    padding-top: 16px;
+  }
+
+  .club-stats-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 12px;
+  }
+
+  .club-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 7px;
+  }
+
+  .club-stat-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 7px 11px;
+    gap: 8px;
+  }
+
+  .club-stat-name {
+    font-size: 12px;
+    color: var(--text-primary);
+    font-weight: 500;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .club-stat-count {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    flex-shrink: 0;
+    min-width: 22px;
+    text-align: right;
+  }
+
+  @media (max-width: 700px) {
+    .club-stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .club-stat-name { font-size: 11px; }
   }
 
   /* ── 모바일 ── */
@@ -325,6 +384,9 @@
     <a href="schedule_calendar.html" class="nav-btn">← 일정표로 돌아가기</a>
   </div>
 </div>
+
+<!-- 안내 문구 -->
+<div class="summary-bar">나이는 2026년 5월 기준</div>
 
 <!-- 팀 탭 -->
 <div class="team-tabs">
@@ -360,6 +422,8 @@
     </div>
     <div class="players-grid" id="de-fw-grid"></div>
   </div>
+
+  <div class="club-stats" id="de-club-stats"></div>
 
 </div>
 
@@ -398,6 +462,8 @@
     <div class="players-grid" id="fr-fw-grid"></div>
   </div>
 
+  <div class="club-stats" id="fr-club-stats"></div>
+
 </div>
 
 <!-- 잉글랜드 명단 -->
@@ -434,6 +500,8 @@
     </div>
     <div class="players-grid" id="en-fw-grid"></div>
   </div>
+
+  <div class="club-stats" id="en-club-stats"></div>
 
 </div>
 
@@ -472,9 +540,9 @@
     <div class="players-grid" id="kr-fw-grid"></div>
   </div>
 
-</div>
+  <div class="club-stats" id="kr-club-stats"></div>
 
-<div class="summary-bar">* 나이는 2026년 5월 기준 · 키 단위 cm · 이름 클릭 시 네이버 검색으로 이동</div>
+</div>
 
 <script>
 const GERMANY = {
@@ -484,27 +552,27 @@ const GERMANY = {
     { name: "알렉산더 뉘벨",      club: "VfB 슈투트가르트",               age: 29, height: 193 },
   ],
   df: [
+    { name: "요슈아 키미히",        club: "바이에른 뮌헨",                  age: 31, height: 177 },
+    { name: "알렉산다르 파블로비치", club: "바이에른 뮌헨",                 age: 22, height: 189 },
+    { name: "요나단 타",            club: "바이에른 뮌헨",                  age: 30, height: 195 },
     { name: "발데마르 안톤",        club: "보루시아 도르트문트",            age: 29, height: 189 },
     { name: "나다니엘 브라운",      club: "아인트라흐트 프랑크푸르트",     age: 22, height: 176 },
     { name: "파스칼 그로스",        club: "브라이턴 & 호브 알비온",        age: 34, height: 181 },
-    { name: "요슈아 키미히",        club: "바이에른 뮌헨",                  age: 31, height: 177 },
     { name: "펠릭스 은메차",        club: "보루시아 도르트문트",            age: 25, height: 186 },
-    { name: "알렉산다르 파블로비치", club: "바이에른 뮌헨",                 age: 22, height: 189 },
     { name: "다비드 라움",          club: "RB 라이프치히",                  age: 28, height: 180 },
     { name: "안토니오 뤼디거",      club: "레알 마드리드",                  age: 33, height: 190 },
     { name: "니코 슐로터벡",        club: "보루시아 도르트문트",            age: 26, height: 191 },
     { name: "안젤로 슈틸러",        club: "VfB 슈투트가르트",               age: 25, height: 183 },
-    { name: "요나단 타",            club: "바이에른 뮌헨",                  age: 30, height: 195 },
     { name: "말릭 티아우",          club: "뉴캐슬 유나이티드",              age: 24, height: 191 },
   ],
   fw: [
+    { name: "레온 고레츠카",        club: "바이에른 뮌헨",                  age: 31, height: 189 },
+    { name: "레나르트 칼",          club: "바이에른 뮌헨",                  age: 18, height: 168 },
+    { name: "자말 무시알라",        club: "바이에른 뮌헨",                  age: 23, height: 186 },
     { name: "나딤 아미리",          club: "FSV 마인츠 05",                  age: 28, height: 177 },
     { name: "막시밀리안 바이어",    club: "보루시아 도르트문트",            age: 22, height: 184 },
-    { name: "레온 고레츠카",        club: "바이에른 뮌헨",                  age: 31, height: 189 },
     { name: "카이 하베르츠",        club: "아스날",                         age: 26, height: 193 },
-    { name: "레나르트 칼",          club: "바이에른 뮌헨",                  age: 18, height: 168 },
     { name: "제이미 레벨링",        club: "VfB 슈투트가르트",               age: 24, height: 186 },
-    { name: "자말 무시알라",        club: "바이에른 뮌헨",                  age: 23, height: 186 },
     { name: "르로이 사네",          club: "갈라타사라이",                   age: 30, height: 183 },
     { name: "데니즈 운다브",        club: "VfB 슈투트가르트",               age: 29, height: 179 },
     { name: "플로리안 비르츠",      club: "리버풀",                         age: 22, height: 176 },
@@ -519,6 +587,7 @@ const FRANCE = {
     { name: "브리스 삼바",          club: "스타드 렌",                      age: 31, height: 194 },
   ],
   df: [
+    { name: "다요 우파메카노",      club: "바이에른 뮌헨",                  age: 27, height: 186 },
     { name: "뤼카 디뉴",            club: "아스톤 빌라",                    age: 32, height: 180 },
     { name: "말로 귀스토",          club: "첼시",                           age: 23, height: 179 },
     { name: "뤼카 에르난데스",      club: "파리 생제르맹",                  age: 30, height: 184 },
@@ -527,7 +596,6 @@ const FRANCE = {
     { name: "쥘 쿤데",              club: "FC 바르셀로나",                  age: 27, height: 177 },
     { name: "막상스 라크루아",      club: "크리스털 팰리스",                age: 26, height: 191 },
     { name: "윌리엄 살리바",        club: "아스날",                         age: 25, height: 192 },
-    { name: "다요 우파메카노",      club: "바이에른 뮌헨",                  age: 27, height: 186 },
   ],
   mf: [
     { name: "은골로 캉테",          club: "페네르바체",                     age: 35, height: 168 },
@@ -537,6 +605,7 @@ const FRANCE = {
     { name: "워렌 자이르에메리",    club: "파리 생제르맹",                  age: 20, height: 176 },
   ],
   fw: [
+    { name: "마이클 올리세",        club: "바이에른 뮌헨",                  age: 24, height: 179 },
     { name: "마그네스 아클리우슈",  club: "AS 모나코",                      age: 24, height: 176 },
     { name: "브래들리 바르콜라",    club: "파리 생제르맹",                  age: 23, height: 180 },
     { name: "라얀 셰르키",          club: "맨체스터 시티",                  age: 22, height: 172 },
@@ -544,7 +613,6 @@ const FRANCE = {
     { name: "데지레 두에",          club: "파리 생제르맹",                  age: 21, height: 179 },
     { name: "장필리프 마테타",      club: "크리스털 팰리스",                age: 28, height: 194 },
     { name: "킬리안 음바페",        club: "레알 마드리드",                  age: 27, height: 180 },
-    { name: "마이클 올리세",        club: "바이에른 뮌헨",                  age: 24, height: 179 },
     { name: "마르쿠스 튀랑",        club: "인테르 밀란",                    age: 28, height: 191 },
   ]
 };
@@ -575,16 +643,41 @@ function renderGrid(gridId, players) {
   if (countEl) countEl.textContent = players.length + '명';
 }
 
+function renderClubStats(containerId, teamData, accentColor) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  const allPlayers = [
+    ...teamData.gk,
+    ...teamData.df,
+    ...(teamData.mf || []),
+    ...teamData.fw
+  ];
+  const counts = {};
+  allPlayers.forEach(p => { counts[p.club] = (counts[p.club] || 0) + 1; });
+  const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]));
+  container.innerHTML = `
+    <div class="club-stats-title">소속팀 현황</div>
+    <div class="club-stats-grid">
+      ${sorted.map(([club, count]) => `
+        <div class="club-stat-row">
+          <span class="club-stat-name">${club}</span>
+          <span class="club-stat-count" style="color:${accentColor}">${count}명</span>
+        </div>`).join('')}
+    </div>`;
+}
+
 // 독일
 renderGrid('de-gk-grid', GERMANY.gk);
 renderGrid('de-df-grid', GERMANY.df);
 renderGrid('de-fw-grid', GERMANY.fw);
+renderClubStats('de-club-stats', GERMANY, 'var(--germany-text)');
 
 // 프랑스
 renderGrid('fr-gk-grid', FRANCE.gk);
 renderGrid('fr-df-grid', FRANCE.df);
 renderGrid('fr-mf-grid', FRANCE.mf);
 renderGrid('fr-fw-grid', FRANCE.fw);
+renderClubStats('fr-club-stats', FRANCE, 'var(--france-text)');
 
 // 잉글랜드
 const ENGLAND = {
@@ -599,7 +692,7 @@ const ENGLAND = {
     { name: "마크 게히",      club: "맨체스터 시티",       age: 25, height: 182 },
     { name: "에즈리 콘사",    club: "아스톤 빌라",         age: 28, height: 182 },
     { name: "존 스톤스",      club: "맨체스터 시티",       age: 31, height: 188 },
-    { name: "자렐 콴사",      club: "바이어 레버쿠젠",     age: 23, height: 190 },
+    { name: "자렐 콴사",      club: "바이어 04 레버쿠젠",     age: 23, height: 190 },
     { name: "니코 오라일리",  club: "맨체스터 시티",       age: 20, height: 185 },
     { name: "댄 번",          club: "뉴캐슬 유나이티드",   age: 33, height: 193 },
     { name: "제드 스펜스",    club: "토트넘 홋스퍼",       age: 25, height: 178 },
@@ -614,11 +707,11 @@ const ENGLAND = {
   ],
   fw: [
     { name: "해리 케인",      club: "바이에른 뮌헨",       age: 31, height: 188 },
-    { name: "아이반 토니",    club: "알-이티하드",         age: 29, height: 185 },
+    { name: "아이반 토니",    club: "알 아흘리 SFC",         age: 29, height: 185 },
     { name: "올리 왓킨스",    club: "아스톤 빌라",         age: 30, height: 180 },
     { name: "부카요 사카",    club: "아스날",              age: 23, height: 178 },
     { name: "노니 마두에케",  club: "첼시",                age: 23, height: 174 },
-    { name: "마커스 래시포드", club: "바르셀로나 (임대)",  age: 28, height: 180 },
+    { name: "마커스 래시포드", club: "바르셀로나",  age: 28, height: 180 },
     { name: "앤서니 고든",    club: "뉴캐슬 유나이티드",   age: 24, height: 178 },
     { name: "에베레치 에제",  club: "아스날",              age: 26, height: 182 },
   ]
@@ -628,6 +721,7 @@ renderGrid('en-gk-grid', ENGLAND.gk);
 renderGrid('en-df-grid', ENGLAND.df);
 renderGrid('en-mf-grid', ENGLAND.mf);
 renderGrid('en-fw-grid', ENGLAND.fw);
+renderClubStats('en-club-stats', ENGLAND, 'var(--england-text)');
 
 // 대한민국
 const KOREA = {
@@ -637,8 +731,8 @@ const KOREA = {
     { name: "조현우",          club: "울산 HD",                    age: 34, height: 189 },
   ],
   df: [
-    { name: "김문환",          club: "대전 하나시티즌",            age: 29, height: 177 },
     { name: "김민재",          club: "바이에른 뮌헨",              age: 29, height: 190 },
+    { name: "김문환",          club: "대전 하나시티즌",            age: 29, height: 177 },
     { name: "김태현",          club: "가시마 앤틀러스",            age: 24, height: 186 },
     { name: "박진섭",          club: "저장 FC",                    age: 29, height: 186 },
     { name: "설영우",          club: "츠르베나 즈베즈다",          age: 27, height: 184 },
@@ -671,6 +765,7 @@ renderGrid('kr-gk-grid', KOREA.gk);
 renderGrid('kr-df-grid', KOREA.df);
 renderGrid('kr-mf-grid', KOREA.mf);
 renderGrid('kr-fw-grid', KOREA.fw);
+renderClubStats('kr-club-stats', KOREA, 'var(--korea-text)');
 
 // 탭 전환
 document.querySelectorAll('.team-tab[data-team]').forEach(tab => {
