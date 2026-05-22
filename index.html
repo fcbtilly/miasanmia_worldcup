@@ -111,11 +111,19 @@
 
   .legend-swatch-korea {
     width: 22px; height: 10px; border-radius: 2px;
-    background: #e8f3d8; border: 1px solid #b8d98a; flex-shrink: 0;
+    background: #fce0e0; border: 1px solid #e8a0a0; flex-shrink: 0;
   }
   .legend-swatch-germany {
     width: 22px; height: 10px; border-radius: 2px;
-    background: #ddeaf8; border: 1px solid #7aadd4; flex-shrink: 0;
+    background: #fdf6c0; border: 1px solid #e0cc50; flex-shrink: 0;
+  }
+  .legend-swatch-england {
+    width: 22px; height: 10px; border-radius: 2px;
+    background: #b8e4f9; border: 1px solid #5bbce4; flex-shrink: 0;
+  }
+  .legend-swatch-france {
+    width: 22px; height: 10px; border-radius: 2px;
+    background: #c8d4ee; border: 1px solid #7a8fc8; flex-shrink: 0;
   }
 
   .legend-bold-swatch {
@@ -150,15 +158,25 @@
     line-height: 1.2;
   }
 
-  /* 찐조국 (한국) - 초록 */
-  .match.shaded-korea { background: #e8f3d8; border-left: 2.5px solid #b8d98a; padding-left: 5px !important; }
-  .match.shaded-korea .match-teams { color: #3a6b0f; font-weight: 500; }
-  .match.shaded-korea .match-time  { color: #5a8a28; }
+  /* 찐조국 (한국) - 핑크빨강 */
+  .match.shaded-korea { background: #fce0e0; border-left: 2.5px solid #e8a0a0; padding-left: 5px !important; }
+  .match.shaded-korea .match-teams { color: #a02020; font-weight: 500; }
+  .match.shaded-korea .match-time  { color: #c04040; }
 
-  /* 짭조국 (독일) - 파랑 */
-  .match.shaded-germany { background: #ddeaf8; border-left: 2.5px solid #7aadd4; padding-left: 5px !important; }
-  .match.shaded-germany .match-teams { color: #1a3a6b; font-weight: 500; }
-  .match.shaded-germany .match-time  { color: #2a5a9b; }
+  /* 짭조국 (독일) - 옅은 노랑 */
+  .match.shaded-germany { background: #fdf6c0; border-left: 2.5px solid #e0cc50; padding-left: 5px !important; }
+  .match.shaded-germany .match-teams { color: #7a6400; font-weight: 500; }
+  .match.shaded-germany .match-time  { color: #a08820; }
+
+  /* 짭짭조국1 (잉글랜드) - 하늘색 */
+  .match.shaded-england { background: #b8e4f9; border-left: 2.5px solid #5bbce4; padding-left: 5px !important; }
+  .match.shaded-england .match-teams { color: #0a527a; font-weight: 500; }
+  .match.shaded-england .match-time  { color: #2a7aaa; }
+
+  /* 짭짭조국2 (프랑스) - 옅은 남색 */
+  .match.shaded-france { background: #c8d4ee; border-left: 2.5px solid #7a8fc8; padding-left: 5px !important; }
+  .match.shaded-france .match-teams { color: #1a2d6b; font-weight: 500; }
+  .match.shaded-france .match-time  { color: #3a4f9b; }
 
   .match.bold .match-teams   { font-weight: 700; color: #b52020; }
   .match.bold .match-time    { color: #c04040; }
@@ -325,16 +343,28 @@
     }
 
     .list-match.shaded-korea .match-teams {
-      background: #e8f3d8; border-left: 2.5px solid #b8d98a;
-      color: #3a6b0f; font-weight: 500; padding-left: 6px;
+      background: #fce0e0; border-left: 2.5px solid #e8a0a0;
+      color: #a02020; font-weight: 500; padding-left: 6px;
     }
-    .list-match.shaded-korea .match-time { color: #5a8a28; }
+    .list-match.shaded-korea .match-time { color: #c04040; }
 
     .list-match.shaded-germany .match-teams {
-      background: #ddeaf8; border-left: 2.5px solid #7aadd4;
-      color: #1a3a6b; font-weight: 500; padding-left: 6px;
+      background: #fdf6c0; border-left: 2.5px solid #e0cc50;
+      color: #7a6400; font-weight: 500; padding-left: 6px;
     }
-    .list-match.shaded-germany .match-time { color: #2a5a9b; }
+    .list-match.shaded-germany .match-time { color: #a08820; }
+
+    .list-match.shaded-england .match-teams {
+      background: #b8e4f9; border-left: 2.5px solid #5bbce4;
+      color: #0a527a; font-weight: 500; padding-left: 6px;
+    }
+    .list-match.shaded-england .match-time { color: #2a7aaa; }
+
+    .list-match.shaded-france .match-teams {
+      background: #c8d4ee; border-left: 2.5px solid #7a8fc8;
+      color: #1a2d6b; font-weight: 500; padding-left: 6px;
+    }
+    .list-match.shaded-france .match-time { color: #3a4f9b; }
 
     .list-match.bold .match-teams { font-weight: 700; color: #b52020; }
     .list-match.bold .match-time  { color: #c04040; }
@@ -369,6 +399,14 @@
         <span>짭조국 경기</span>
       </div>
       <div class="legend-item">
+        <div class="legend-swatch-england"></div>
+        <span>짭짭조국1 경기</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch-france"></div>
+        <span>짭짭조국2 경기</span>
+      </div>
+      <div class="legend-item">
         <span class="legend-bold-swatch">빨강</span>
         <span>주목할 만한 경기</span>
       </div>
@@ -378,7 +416,7 @@
 
 <div class="notice">
   * 이 페이지는 여러 개의 심장을 가진 바바리안 걸들의 원활한 경기시청을 돕고자 제작되었습니다.<br>
-  * 주목도가 낮은 약팀 간의 경기는 제외하였습니다. (단, <span style="background:#e8f3d8;color:#3a6b0f;font-weight:500;padding:1px 5px;border-radius:3px;">찐조국</span> 및 <span style="background:#ddeaf8;color:#1a3a6b;font-weight:500;padding:1px 5px;border-radius:3px;">짭조국</span>과 같은 조의 경기는 전력분석이 필요하기 때문에 포함함.)
+  * 주목도가 낮은 약팀 간의 경기는 제외하였습니다. (단, <span style="background:#fce0e0;color:#a02020;font-weight:500;padding:1px 5px;border-radius:3px;">찐조국</span>, <span style="background:#fdf6c0;color:#7a6400;font-weight:500;padding:1px 5px;border-radius:3px;">짭조국</span>, <span style="background:#b8e4f9;color:#0a527a;font-weight:500;padding:1px 5px;border-radius:3px;">짭짭조국1</span>, <span style="background:#c8d4ee;color:#1a2d6b;font-weight:500;padding:1px 5px;border-radius:3px;">짭짭조국2</span>과 같은 조의 경기는 전력분석이 필요하기 때문에 포함함.)
 </div>
 
 <!-- PC 달력 -->
@@ -420,14 +458,14 @@ const MATCHES = {
     { time: "오전 07:00", teams: "사우디 vs 우루과이", type: "" }
   ],
   "6/17": [
-    { time: "오전 04:00", teams: "프랑스 vs 세네갈", type: "" },
+    { time: "오전 04:00", teams: "프랑스 vs 세네갈", type: "shaded-france" },
     { time: "오전 07:00", teams: "이라크 vs 노르웨이", type: "" },
     { time: "오전 10:00", teams: "아르헨티나 vs 알제리", type: "" },
     { time: "오후 01:00", teams: "오스트리아 vs 요르단", type: "" }
   ],
   "6/18": [
     { time: "오전 02:00", teams: "포르투갈 vs 콩고", type: "" },
-    { time: "오전 05:00", teams: "잉글랜드 vs 크로아티아", type: "bold" },
+    { time: "오전 05:00", teams: "잉글랜드 vs 크로아티아", type: "shaded-england" },
     { time: "오전 11:00", teams: "우즈벡 vs 콜롬비아", type: "" }
   ],
   "6/19": [
@@ -453,12 +491,12 @@ const MATCHES = {
   ],
   "6/23": [
     { time: "오전 02:00", teams: "아르헨티나 vs 오스트리아", type: "bold" },
-    { time: "오전 06:00", teams: "프랑스 vs 이라크", type: "" },
+    { time: "오전 06:00", teams: "프랑스 vs 이라크", type: "shaded-france" },
     { time: "오전 09:00", teams: "노르웨이 vs 세네갈", type: "" }
   ],
   "6/24": [
     { time: "오전 02:00", teams: "포르투갈 vs 우즈벡", type: "" },
-    { time: "오전 05:00", teams: "잉글랜드 vs 가나", type: "" },
+    { time: "오전 05:00", teams: "잉글랜드 vs 가나", type: "shaded-england" },
     { time: "오전 08:00", teams: "파나마 vs 크로아티아", type: "" },
     { time: "오전 11:00", teams: "콜롬비아 vs 콩고", type: "" }
   ],
@@ -477,14 +515,14 @@ const MATCHES = {
     { time: "오전 11:00", teams: "튀르키예 vs 미국", type: "" }
   ],
   "6/27": [
-    { time: "오전 04:00", teams: "노르웨이 vs 프랑스", type: "bold" },
+    { time: "오전 04:00", teams: "노르웨이 vs 프랑스", type: "shaded-france" },
     { time: "오전 04:00", teams: "세네갈 vs 이라크", type: "" },
     { time: "오전 09:00", teams: "우루과이 vs 스페인", type: "bold" },
     { time: "오후 12:00", teams: "뉴질랜드 vs 벨기에", type: "" }
   ],
   "6/28": [
     { time: "오전 06:00", teams: "크로아티아 vs 가나", type: "" },
-    { time: "오전 06:00", teams: "파나마 vs 잉글랜드", type: "" },
+    { time: "오전 06:00", teams: "파나마 vs 잉글랜드", type: "shaded-england" },
     { time: "오전 08:30", teams: "콜롬비아 vs 포르투갈", type: "bold" },
     { time: "오전 11:00", teams: "알제리 vs 오스트리아", type: "" },
     { time: "오전 11:00", teams: "요르단 vs 아르헨티나", type: "" }
