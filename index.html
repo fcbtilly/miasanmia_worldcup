@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>FIFA 2026 북중미 월드컵 조별리그 주요경기 일정</title>
+<title>FIFA 2026 북중미 월드컵 전체 경기 일정</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Barlow+Condensed:wght@400;600;700&display=swap');
 
@@ -125,6 +125,28 @@
     width: 22px; height: 10px; border-radius: 2px;
     background: #c8d4ee; border: 1px solid #7a8fc8; flex-shrink: 0;
   }
+  .legend-swatch-sf {
+    width: 22px; height: 10px; border-radius: 2px;
+    background: #ece3f5; border: 1px solid #b89cd6; flex-shrink: 0;
+  }
+  .legend-swatch-third {
+    width: 22px; height: 10px; border-radius: 2px;
+    background: #ddeaf8; border: 1px solid #7aadd4; flex-shrink: 0;
+  }
+  .legend-swatch-final {
+    width: 22px; height: 10px; border-radius: 2px;
+    background: #fdf6c0; border: 1px solid #e0cc50; flex-shrink: 0;
+  }
+  .legend-swatch-ger-fra {
+    width: 22px; height: 10px; border-radius: 2px;
+    background: linear-gradient(135deg, #fdf6c0 50%, #c8d4ee 50%);
+    border: 1px solid #7a8fc8; flex-shrink: 0;
+  }
+  .legend-swatch-final3 {
+    width: 22px; height: 10px; border-radius: 2px;
+    background: linear-gradient(135deg, #fdf6c0 33%, #c8d4ee 33% 66%, #b8e4f9 66%);
+    border: 1px solid #5bbce4; flex-shrink: 0;
+  }
 
   .legend-bold-swatch {
     font-size: 11px; font-weight: 700; color: #b52020;
@@ -180,6 +202,59 @@
 
   .match.bold .match-teams   { font-weight: 700; color: #b52020; }
   .match.bold .match-time    { color: #c04040; }
+
+  /* ── 결선 토너먼트 매치 타입 ── */
+  .match-num {
+    font-size: 9px;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-right: 3px;
+  }
+
+  /* 준결승 - 퍼플 */
+  .match.is-sf { background: #ece3f5; border-left: 2.5px solid #b89cd6; padding-left: 5px !important; }
+  .match.is-sf .match-teams { color: #5a3a8a; font-weight: 600; }
+  .match.is-sf .match-time  { color: #6a4a9a; }
+
+  /* 3·4위전 - 블루 */
+  .match.is-third { background: #ddeaf8; border-left: 2.5px solid #7aadd4; padding-left: 5px !important; }
+  .match.is-third .match-teams { color: #1a3a6b; font-weight: 600; }
+  .match.is-third .match-time  { color: #2a5a9b; }
+
+  /* 결승 - 골드 */
+  .match.is-final { background: #fdf6c0; border-left: 2.5px solid #e0cc50; padding-left: 5px !important; }
+  .match.is-final .match-teams { color: #7a6400; font-weight: 700; }
+  .match.is-final .match-time  { color: #a08820; }
+
+  /* 독일·프랑스 동시 진출 가정 (E조1위·I조1위가 만나는 라운드) */
+  .match.shaded-ger-fra {
+    background: linear-gradient(135deg, #fdf6c0 50%, #c8d4ee 50%);
+    border-left: 2.5px solid #7a8fc8;
+    padding-left: 5px !important;
+  }
+  .match.shaded-ger-fra .match-teams { color: #2a2a2a; font-weight: 600; }
+  .match.shaded-ger-fra .match-time  { color: #5a5a5a; }
+
+  /* 독일/프랑스 vs 잉글랜드 결승 가정 (3국 모두 우승 시까지 진출 가정) */
+  .match.shaded-final3 {
+    background: linear-gradient(135deg, #fdf6c0 33%, #c8d4ee 33% 66%, #b8e4f9 66%);
+    border-left: 2.5px solid #5bbce4;
+    padding-left: 5px !important;
+  }
+  .match.shaded-final3 .match-teams { color: #1a1a1a; font-weight: 700; }
+  .match.shaded-final3 .match-time  { color: #4a4a4a; }
+
+  /* 앵커 이동 시 하이라이트 효과 */
+  @keyframes flashHighlight {
+    0%   { box-shadow: 0 0 0 0 rgba(26,58,107,0.55); }
+    60%  { box-shadow: 0 0 0 7px rgba(26,58,107,0); }
+    100% { box-shadow: 0 0 0 0 rgba(26,58,107,0); }
+  }
+  .match.jump-highlight, .list-match.jump-highlight {
+    animation: flashHighlight 1s ease-out 2;
+    outline: 2px solid var(--accent);
+    outline-offset: 1px;
+  }
 
   /* ════════════════════════════════
      PC: 달력 뷰
@@ -256,6 +331,7 @@
     padding: 3px 6px;
     border-radius: 3px;
     color: var(--text-primary);
+    scroll-margin-top: 100px;
   }
 
   /* 모바일 달력 숨김 */
@@ -322,6 +398,7 @@
       gap: 10px;
       padding: 9px 14px;
       border-bottom: 1px solid var(--border);
+      scroll-margin-top: 100px;
     }
 
     .list-match:last-child { border-bottom: none; }
@@ -368,6 +445,38 @@
 
     .list-match.bold .match-teams { font-weight: 700; color: #b52020; }
     .list-match.bold .match-time  { color: #c04040; }
+
+    .list-match.is-sf .match-teams {
+      background: #ece3f5; border-left: 2.5px solid #b89cd6;
+      color: #5a3a8a; font-weight: 600; padding-left: 6px;
+    }
+    .list-match.is-sf .match-time { color: #6a4a9a; }
+
+    .list-match.is-third .match-teams {
+      background: #ddeaf8; border-left: 2.5px solid #7aadd4;
+      color: #1a3a6b; font-weight: 600; padding-left: 6px;
+    }
+    .list-match.is-third .match-time { color: #2a5a9b; }
+
+    .list-match.is-final .match-teams {
+      background: #fdf6c0; border-left: 2.5px solid #e0cc50;
+      color: #7a6400; font-weight: 700; padding-left: 6px;
+    }
+    .list-match.is-final .match-time { color: #a08820; }
+
+    .list-match.shaded-ger-fra .match-teams {
+      background: linear-gradient(135deg, #fdf6c0 50%, #c8d4ee 50%);
+      border-left: 2.5px solid #7a8fc8;
+      color: #2a2a2a; font-weight: 600; padding-left: 6px;
+    }
+    .list-match.shaded-ger-fra .match-time { color: #5a5a5a; }
+
+    .list-match.shaded-final3 .match-teams {
+      background: linear-gradient(135deg, #fdf6c0 33%, #c8d4ee 33% 66%, #b8e4f9 66%);
+      border-left: 2.5px solid #5bbce4;
+      color: #1a1a1a; font-weight: 700; padding-left: 6px;
+    }
+    .list-match.shaded-final3 .match-time { color: #4a4a4a; }
   }
 
   @media print {
@@ -382,13 +491,14 @@
 <div class="page-header">
   <div>
     <div class="page-title">FIFA 2026 북중미 <span>월드컵</span></div>
-    <div class="page-sub">조별리그 주요경기 일정 · 한국 시간 기준</div>
+    <div class="page-sub">전체 경기 일정 · 조별리그 + 결선 토너먼트 · 한국 시간 기준</div>
   </div>
   <div class="header-right">
     <div class="nav-btns">
       <a href="groups.html" class="nav-btn">⚽ 조편성 보기</a>
       <a href="stadiums.html" class="nav-btn">🏟 경기장 현황</a>
       <a href="squad.html" class="nav-btn">👤 선수 명단</a>
+      <a href="bracket.html" class="nav-btn">🏆 토너먼트 대진표</a>
     </div>
     <div class="legend">
       <div class="legend-item">
@@ -411,12 +521,23 @@
         <span class="legend-bold-swatch">빨강</span>
         <span>주목할 만한 경기</span>
       </div>
+      <div class="legend-item">
+        <div class="legend-swatch-ger-fra"></div>
+        <span>짭조국·짭짭조국2 동시 진출 가정</span>
+      </div>
+      <div class="legend-item">
+        <div class="legend-swatch-final3"></div>
+        <span>짭짭조국1 vs 짭조국·짭짭조국2 결승 가정</span>
+      </div>
     </div>
   </div>
 </div>
 
 <div class="notice">
-  * 이 페이지는 여러 개의 심장을 가진 바바리안 걸들의 원활한 경기시청을 돕고자 제작되었습니다.
+  * 이 페이지는 여러 개의 심장을 가진 바바리안 걸들의 원활한 경기시청을 돕고자 제작되었습니다.<br>
+  ⚠️ 6/29 이후 경기는 32강~결승 토너먼트입니다. 대진(팀)은 조별리그 최종 결과가 나와야 확정되며, 현재는 FIFA가 사전 확정한 매치 번호·날짜·시간만 표기되어 있습니다.<br>
+  * 🇩🇪 독일(E조 1위)·🇫🇷 프랑스(I조 1위)·🏴󠁧󠁢󠁥󠁮󠁧󠁿 잉글랜드(L조 1위)가 각 라운드에서 승리한다고 가정했을 때 치르게 될 16강·8강·준결승·결승 경기에 음영을 표시했습니다. (독일과 프랑스는 가정상 16강에서 맞붙게 되어 같은 경기에 동시 표시됩니다)<br>
+  * 🏆 토너먼트 대진표(트리)에서 경기를 클릭하면 이 캘린더의 해당 날짜로 자동 이동합니다.
 </div>
 
 <!-- PC 달력 -->
@@ -443,7 +564,7 @@ const MATCHES = {
     { time: "오전 11:00", teams: "한국 vs 체코", type: "shaded-korea" }
   ],
   "6/13": [
-    { time: "오전 04:00", teams: "캐나다 vs 보스니아", type: "" },
+    { time: "오전 04:00", teams: "캐나다 vs 보스니아 헤르체고비나", type: "" },
     { time: "오전 10:00", teams: "미국 vs 파라과이", type: "" }
   ],
   "6/14": [
@@ -514,7 +635,7 @@ const MATCHES = {
   ],
   "6/25": [
     { time: "오전 04:00", teams: "스위스 vs 캐나다", type: "" },
-    { time: "오전 04:00", teams: "보스니아 vs 카타르", type: "" },
+    { time: "오전 04:00", teams: "보스니아 헤르체고비나 vs 카타르", type: "" },
     { time: "오전 07:00", teams: "모로코 vs 아이티", type: "" },
     { time: "오전 07:00", teams: "스코틀랜드 vs 브라질", type: "" },
     { time: "오전 10:00", teams: "체코 vs 멕시코", type: "" },
@@ -543,6 +664,74 @@ const MATCHES = {
     { time: "오전 08:30", teams: "콩고민주공화국 vs 우즈벡", type: "" },
     { time: "오전 11:00", teams: "알제리 vs 오스트리아", type: "" },
     { time: "오전 11:00", teams: "요르단 vs 아르헨티나", type: "" }
+  ],
+
+  /* ══════ 결선 토너먼트 (32강~결승) ══════ */
+  "6/29": [
+    { num: 73, time: "오전 04:00", teams: "A조 2위 vs B조 2위", type: "" }
+  ],
+  "6/30": [
+    { num: 76, time: "오전 02:00", teams: "C조 1위 vs F조 2위", type: "" },
+    { num: 74, time: "오전 05:30", teams: "E조 1위 vs A/B/C/D/F조 3위", type: "shaded-germany" },
+    { num: 75, time: "오전 10:00", teams: "F조 1위 vs C조 2위", type: "" }
+  ],
+  "7/1": [
+    { num: 78, time: "오전 02:00", teams: "E조 2위 vs I조 2위", type: "" },
+    { num: 77, time: "오전 06:00", teams: "I조 1위 vs C/D/F/G/H조 3위", type: "shaded-france" },
+    { num: 79, time: "오전 10:00", teams: "멕시코(A조1위) vs C/E/F/H/I조 3위", type: "" }
+  ],
+  "7/2": [
+    { num: 80, time: "오전 01:00", teams: "L조 1위 vs E/H/I/J/K조 3위", type: "shaded-england" },
+    { num: 82, time: "오전 05:00", teams: "G조 1위 vs A/E/H/I/J조 3위", type: "" },
+    { num: 81, time: "오전 09:00", teams: "미국(D조1위) vs B/E/F/I/J조 3위", type: "" }
+  ],
+  "7/3": [
+    { num: 84, time: "오전 04:00", teams: "H조 1위 vs J조 2위", type: "" },
+    { num: 83, time: "오전 08:00", teams: "K조 2위 vs L조 2위", type: "" },
+    { num: 85, time: "오후 12:00", teams: "B조 1위 vs E/F/G/I/J조 3위", type: "" }
+  ],
+  "7/4": [
+    { num: 88, time: "오전 03:00", teams: "D조 2위 vs G조 2위", type: "" },
+    { num: 86, time: "오전 07:00", teams: "J조 1위 vs H조 2위", type: "" },
+    { num: 87, time: "오전 10:30", teams: "K조 1위 vs D/E/I/J/L조 3위", type: "" }
+  ],
+  "7/5": [
+    { num: 90, time: "오전 02:00", teams: "M73 승자 vs M75 승자", type: "" },
+    { num: 89, time: "오전 06:00", teams: "M74 승자 vs M77 승자", type: "shaded-ger-fra" }
+  ],
+  "7/6": [
+    { num: 91, time: "오전 05:00", teams: "M76 승자 vs M78 승자", type: "" },
+    { num: 92, time: "오전 09:00", teams: "M79 승자 vs M80 승자", type: "shaded-england" }
+  ],
+  "7/7": [
+    { num: 93, time: "오전 04:00", teams: "M83 승자 vs M84 승자", type: "" },
+    { num: 94, time: "오전 09:00", teams: "M81 승자 vs M82 승자", type: "" }
+  ],
+  "7/8": [
+    { num: 95, time: "오전 01:00", teams: "M86 승자 vs M88 승자", type: "" },
+    { num: 96, time: "오전 05:00", teams: "M85 승자 vs M87 승자", type: "" }
+  ],
+  "7/10": [
+    { num: 97, time: "오전 05:00", teams: "M89 승자 vs M90 승자", type: "shaded-ger-fra" }
+  ],
+  "7/11": [
+    { num: 98, time: "오전 04:00", teams: "M93 승자 vs M94 승자", type: "" }
+  ],
+  "7/12": [
+    { num: 99, time: "오전 06:00", teams: "M91 승자 vs M92 승자", type: "shaded-england" },
+    { num: 100, time: "오전 10:00", teams: "M95 승자 vs M96 승자", type: "" }
+  ],
+  "7/15": [
+    { num: 101, time: "오전 04:00", teams: "M97 승자 vs M98 승자", type: "shaded-ger-fra" }
+  ],
+  "7/16": [
+    { num: 102, time: "오전 04:00", teams: "M99 승자 vs M100 승자", type: "shaded-england" }
+  ],
+  "7/19": [
+    { num: 103, time: "오전 06:00", teams: "M101 패자 vs M102 패자", type: "" }
+  ],
+  "7/20": [
+    { num: 104, time: "오전 04:00", teams: "M101 승자 vs M102 승자", type: "shaded-final3" }
   ]
 };
 
@@ -552,10 +741,17 @@ const weeks = [
   [[6,7],[6,8],[6,9],[6,10],[6,11],[6,12],[6,13]],
   [[6,14],[6,15],[6,16],[6,17],[6,18],[6,19],[6,20]],
   [[6,21],[6,22],[6,23],[6,24],[6,25],[6,26],[6,27]],
-  [[6,28],[6,29],[6,30],[7,1],[7,2],[7,3],[7,4]]
+  [[6,28],[6,29],[6,30],[7,1],[7,2],[7,3],[7,4]],
+  [[7,5],[7,6],[7,7],[7,8],[7,9],[7,10],[7,11]],
+  [[7,12],[7,13],[7,14],[7,15],[7,16],[7,17],[7,18]],
+  [[7,19],[7,20],[7,21],[7,22],[7,23],[7,24],[7,25]]
 ];
 
-function inRange(m, d) { return m === 6 && d >= 12 && d <= 28; }
+function inRange(m, d) {
+  if (m === 6) return d >= 12;
+  if (m === 7) return d <= 20;
+  return false;
+}
 function key(m, d) { return m+"/"+d; }
 
 /* ── PC 달력 렌더 ── */
@@ -579,7 +775,9 @@ function renderCalendar() {
         matches.forEach(mt => {
           const el = document.createElement('div');
           el.className = 'match' + (mt.type ? ' '+mt.type : '');
-          el.innerHTML = `<span class="match-time">${mt.time}</span><span class="match-teams">${mt.teams}</span>`;
+          if (mt.num) el.id = 'match-' + mt.num;
+          const numLabel = mt.num ? `<span class="match-num">M${mt.num}</span>` : '';
+          el.innerHTML = `<span class="match-time">${numLabel}${mt.time}</span><span class="match-teams">${mt.teams}</span>`;
           wrap.appendChild(el);
         });
         cell.appendChild(wrap);
@@ -612,8 +810,8 @@ function renderList() {
       </div>
       <div class="list-matches">
         ${matches.map(mt => `
-          <div class="list-match ${mt.type}">
-            <span class="match-time">${mt.time}</span>
+          <div class="list-match ${mt.type}" ${mt.num ? `id="match-m-${mt.num}"` : ''}>
+            <span class="match-time">${mt.num ? `<span class="match-num">M${mt.num}</span>` : ''}${mt.time}</span>
             <span class="match-teams">${mt.teams}</span>
           </div>`).join('')}
       </div>`;
@@ -623,6 +821,22 @@ function renderList() {
 
 renderCalendar();
 renderList();
+
+/* ── 앵커(#match-NN) 이동 시 하이라이트 (대진표 트리에서 클릭 시 사용) ── */
+function jumpToHash() {
+  const hash = location.hash.replace('#', '');
+  if (!hash) return;
+  const targets = [document.getElementById(hash), document.getElementById(hash.replace('match-','match-m-'))].filter(Boolean);
+  targets.forEach(t => {
+    if (t.offsetParent !== null) {
+      t.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      t.classList.add('jump-highlight');
+      setTimeout(() => t.classList.remove('jump-highlight'), 2200);
+    }
+  });
+}
+window.addEventListener('load', () => setTimeout(jumpToHash, 80));
+window.addEventListener('hashchange', jumpToHash);
 </script>
 
 </body>
