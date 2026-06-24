@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIFA 2026 북중미 월드컵 결선 토너먼트 대진표</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Barlow+Condensed:wght@400;600;700&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #f5f4f0;
+    --surface: #ffffff;
+    --border: #e0ddd5;
+    --border-dark: #c8c4b8;
+    --text-primary: #1a1917;
+    --text-secondary: #6b6860;
+    --text-muted: #9e9b92;
+    --header-bg: #1a1917;
+    --accent: #1a3a6b;
+    --line: #b8b4a8;
+  }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    min-height: 100vh;
+    padding: 32px 24px;
+  }
+
+  /* ── 헤더 ── */
+  .page-header {
+    max-width: 1200px;
+    margin: 0 auto 14px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+
+  .page-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: var(--text-primary);
+    line-height: 1;
+  }
+
+  .page-title span { color: var(--accent); }
+
+  .page-sub {
+    font-size: 12px;
+    color: var(--text-muted);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .nav-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+
+  .nav-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: var(--header-bg);
+    color: #fff;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 4px;
+    white-space: nowrap;
+  }
+
+  /* ── 안내 문구 ── */
+  .notice {
+    max-width: 1200px;
+    margin: 0 auto 24px;
+    background: #fff8e1;
+    border: 1px solid #e8d68a;
+    border-radius: 6px;
+    padding: 12px 16px;
+    font-size: 12px;
+    color: #7a6400;
+    line-height: 1.7;
+  }
+
+  /* ════════════ 데스크탑 트리 뷰 ════════════ */
+  #desktop-bracket { display: block; }
+
+  .tree-scroll {
+    max-width: 1580px;
+    margin: 0 auto 40px;
+    overflow-x: auto;
+    padding-bottom: 16px;
+  }
+
+  .tree {
+    display: flex;
+    align-items: center;
+    min-width: 1560px;
+    width: max-content;
+    margin: 0 auto;
+  }
+
+  .half {
+    display: grid;
+    grid-template-columns: 142px 34px 142px 34px 142px 34px 142px;
+    height: 600px;
+    flex-shrink: 0;
+  }
+
+  .half-right { transform: scaleX(-1); }
+
+  .col, .gap { position: relative; height: 600px; }
+
+  .m-card {
+    position: absolute;
+    left: 0;
+    width: 134px;
+    transform: translateY(-50%);
+    background: var(--surface);
+    border: 1px solid var(--border-dark);
+    border-radius: 6px;
+    padding: 6px 9px 5px;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s, transform 0.15s;
+  }
+
+  .m-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 3px 10px rgba(26,58,107,0.18);
+  }
+  .half-right .m-card:hover { transform: translateY(-50%) scaleX(-1); border-color: var(--accent); box-shadow: 0 3px 10px rgba(26,58,107,0.18); }
+  .m-card.is-final:hover { border-color: #b89400; }
+  .m-card.is-third:hover { border-color: #5a8ab4; }
+
+  .half-right .m-card { transform: translateY(-50%) scaleX(-1); }
+
+  .m-card.is-result .m-slot { color: var(--text-secondary); }
+
+  .m-slot {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 11.5px;
+    font-weight: 600;
+    color: var(--text-primary);
+    padding: 2px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .m-dot {
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: #dcd9d0;
+    border: 1px solid #c4c0b4;
+    flex-shrink: 0;
+  }
+
+  .m-meta {
+    font-size: 9px;
+    color: var(--text-muted);
+    margin-top: 4px;
+    border-top: 1px solid var(--border);
+    padding-top: 3px;
+    letter-spacing: 0.01em;
+  }
+
+  .conn-bar {
+    position: absolute;
+    left: 50%;
+    width: 0;
+    border-left: 2px solid var(--line);
+  }
+  .conn-bar::before {
+    content: '';
+    position: absolute;
+    top: 0; left: -17px;
+    width: 17px; height: 0;
+    border-top: 2px solid var(--line);
+  }
+  .conn-bar::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 17px; height: 0;
+    border-top: 2px solid var(--line);
+  }
+
+  /* ── 중앙 컬럼 ── */
+  .center-col {
+    width: 190px;
+    height: 600px;
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .center-col .m-card { width: 142px; left: 24px; }
+
+  .center-link {
+    position: absolute;
+    top: 50%;
+    width: 24px;
+    height: 0;
+    border-top: 2px solid var(--line);
+  }
+  .center-link.cl-left { left: 0; }
+  .center-link.cl-right { right: 0; }
+
+  .trophy-box {
+    position: absolute;
+    left: 24px;
+    width: 142px;
+    top: 16%;
+    transform: translateY(-50%);
+    text-align: center;
+    padding: 10px 8px;
+    border: 1.5px dashed var(--border-dark);
+    border-radius: 8px;
+    color: var(--text-muted);
+  }
+  .trophy-box .trophy-icon { font-size: 26px; line-height: 1; margin-bottom: 4px; }
+  .trophy-box .trophy-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text-secondary);
+  }
+
+  .m-card.is-final { border-color: #d4b400; background: #fffbe6; top: 50%; }
+  .m-card.is-final .m-slot { color: #7a6400; font-weight: 700; }
+  .badge {
+    display: inline-block;
+    font-size: 9px;
+    font-weight: 600;
+    padding: 1px 6px;
+    border-radius: 2px;
+    margin-bottom: 4px;
+  }
+  .badge-final { background: #fde68a; color: #7c5700; }
+  .badge-third { background: #cfe3f7; color: #1a5a8a; }
+
+  .m-card.is-third { border-color: #7aadd4; background: #f3f9ff; top: 82%; }
+  .m-card.is-third .m-slot { color: #1a5a8a; }
+
+  /* ── 가정 기반 진출 경로 음영 (독일·프랑스·잉글랜드) ── */
+  .m-card.sh-germany { border-color: #e0cc50; background: #fdf6c0; }
+  .m-card.sh-germany .m-slot { color: #7a6400; font-weight: 700; }
+  .m-card.sh-france { border-color: #7a8fc8; background: #c8d4ee; }
+  .m-card.sh-france .m-slot { color: #1a2d6b; font-weight: 700; }
+  .m-card.sh-england { border-color: #5bbce4; background: #b8e4f9; }
+  .m-card.sh-england .m-slot { color: #0a527a; font-weight: 700; }
+  .m-card.sh-ger-fra {
+    border-color: #7a8fc8;
+    background: linear-gradient(135deg, #fdf6c0 50%, #c8d4ee 50%);
+  }
+  .m-card.sh-ger-fra .m-slot { color: #2a2a2a; font-weight: 700; }
+  .m-card.sh-final3 {
+    border-color: #5bbce4;
+    background: linear-gradient(135deg, #fdf6c0 33%, #c8d4ee 33% 66%, #b8e4f9 66%);
+  }
+  .m-card.sh-final3 .m-slot { color: #1a1a1a; font-weight: 700; }
+  .half-right .m-card.sh-germany:hover,
+  .half-right .m-card.sh-france:hover,
+  .half-right .m-card.sh-england:hover,
+  .half-right .m-card.sh-ger-fra:hover { transform: translateY(-50%) scaleX(-1); }
+
+  /* ════════════ 모바일 탭 뷰 (데스크탑에서는 숨김) ════════════ */
+  #mobile-bracket { display: none; }
+
+  .round-tabs {
+    max-width: 1100px;
+    margin: 0 auto 16px;
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+
+  .round-tab {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    padding: 7px 16px;
+    border-radius: 4px;
+    border: 2px solid var(--border-dark);
+    background: var(--surface);
+    color: var(--text-muted);
+    cursor: pointer;
+    letter-spacing: 0.03em;
+  }
+  .round-tab.active {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+
+  .mobile-round-panel { display: none; max-width: 1100px; margin: 0 auto; }
+  .mobile-round-panel.active { display: block; }
+
+  .mobile-matches { display: flex; flex-direction: column; gap: 8px; }
+
+  .mobile-card {
+    background: var(--surface);
+    border: 1px solid var(--border-dark);
+    border-radius: 6px;
+    padding: 12px 16px;
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    transition: border-color 0.15s, box-shadow 0.15s;
+  }
+  .mobile-card:hover, .mobile-card:active {
+    border-color: var(--accent);
+    box-shadow: 0 2px 8px rgba(26,58,107,0.15);
+  }
+  .mobile-card.is-final { border-color: #d4b400; background: #fffbe6; }
+  .mobile-card.is-third { border-color: #7aadd4; background: #f3f9ff; }
+  .mobile-card.sh-germany { border-color: #e0cc50; background: #fdf6c0; }
+  .mobile-card.sh-france { border-color: #7a8fc8; background: #c8d4ee; }
+  .mobile-card.sh-england { border-color: #5bbce4; background: #b8e4f9; }
+  .mobile-card.sh-ger-fra { border-color: #7a8fc8; background: linear-gradient(135deg, #fdf6c0 50%, #c8d4ee 50%); }
+  .mobile-card.sh-final3 { border-color: #5bbce4; background: linear-gradient(135deg, #fdf6c0 33%, #c8d4ee 33% 66%, #b8e4f9 66%); }
+  .mobile-card.sh-germany .mobile-teams,
+  .mobile-card.sh-france .mobile-teams,
+  .mobile-card.sh-england .mobile-teams,
+  .mobile-card.sh-ger-fra .mobile-teams,
+  .mobile-card.sh-final3 .mobile-teams { font-weight: 700; }
+
+  .mobile-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 6px;
+  }
+
+  .mobile-number {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--accent);
+    background: #eef1f7;
+    padding: 2px 8px;
+    border-radius: 3px;
+  }
+  .is-final .mobile-number { color: #8a6800; background: #fde68a; }
+  .is-third .mobile-number { color: #1a5a8a; background: #cfe3f7; }
+
+  .mobile-datetime { font-size: 11.5px; color: var(--text-secondary); text-align: right; }
+  .mobile-datetime b { color: var(--text-primary); }
+
+  .mobile-teams { font-size: 14px; font-weight: 600; margin-bottom: 4px; }
+  .mobile-venue { font-size: 11.5px; color: var(--text-muted); }
+
+  /* ── 반응형 전환 ── */
+  @media (max-width: 860px) {
+    #desktop-bracket { display: none; }
+    #mobile-bracket { display: block; }
+    body { padding: 16px 14px; }
+    .page-title { font-size: 26px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="page-header">
+  <div>
+    <div class="page-title">FIFA 2026 북중미 <span>월드컵</span></div>
+    <div class="page-sub">결선 토너먼트 대진표 · 32강 ~ 결승</div>
+  </div>
+  <div class="nav-btns">
+    <a href="groups.html" class="nav-btn">⚽ 조편성 보기</a>
+    <a href="stadiums.html" class="nav-btn">🏟 경기장 현황</a>
+    <a href="squad.html" class="nav-btn">👤 선수 명단</a>
+    <a href="schedule_calendar.html" class="nav-btn">← 일정표로 돌아가기</a>
+  </div>
+</div>
+
+<div class="notice">
+  ⚠️ 대진(팀)은 조별리그 최종 결과가 나와야 확정됩니다. 매치 번호·날짜·시간·경기장은 FIFA가 사전에 확정한 정보이며, 조별리그가 끝나는 대로 실제 대진으로 업데이트할 예정입니다.<br>
+  * 시간은 모두 한국시간(KST) 기준입니다. 화면이 좁으면(모바일) 라운드별 탭으로 자동 전환됩니다.<br>
+  * 각 경기 카드를 클릭하면 전체 일정표의 해당 날짜로 바로 이동합니다.
+</div>
+
+<!-- ════════════ 데스크탑 트리 뷰 ════════════ -->
+<div id="desktop-bracket">
+  <div class="tree-scroll">
+    <div class="tree" id="tree-root"></div>
+  </div>
+</div>
+
+<!-- ════════════ 모바일 탭 뷰 ════════════ -->
+<div id="mobile-bracket">
+  <div class="round-tabs" id="round-tabs"></div>
+  <div id="round-panels"></div>
+</div>
+
+<script>
+// ───────────────────────────────────────────────
+// 데이터: 매치 번호 → 정보 (FIFA 공식 매치 슬롯/날짜/시간/경기장)
+// teams가 미정인 경우 slot1/slot2에 조 정보 텍스트, feeds는 다음 라운드 매치번호
+// ───────────────────────────────────────────────
+const M = {
+  // ── 32강 (Left half) ──
+  74:  { round:'r32', half:'L', top:6.25,  slot1:'E조 1위', slot2:'A/B/C/D/F조 3위', date:'6/30(화)', time:'오전 05:30', venue:'질레트 스타디움 (보스턴)', feeds:89 },
+  77:  { round:'r32', half:'L', top:18.75, slot1:'I조 1위', slot2:'C/D/F/G/H조 3위', date:'7/1(수)',  time:'오전 06:00', venue:'메트라이프 스타디움 (뉴욕/뉴저지)', feeds:89 },
+  73:  { round:'r32', half:'L', top:31.25, slot1:'A조 2위', slot2:'B조 2위',          date:'6/29(월)', time:'오전 04:00', venue:'소파이 스타디움 (로스앤젤레스)', feeds:90 },
+  75:  { round:'r32', half:'L', top:43.75, slot1:'F조 1위', slot2:'C조 2위',          date:'6/30(화)', time:'오전 10:00', venue:'에스타디오 BBVA (몬테레이)', feeds:90 },
+  83:  { round:'r32', half:'L', top:56.25, slot1:'K조 2위', slot2:'L조 2위',          date:'7/3(금)',  time:'오전 08:00', venue:'BMO 필드 (토론토)', feeds:93 },
+  84:  { round:'r32', half:'L', top:68.75, slot1:'H조 1위', slot2:'J조 2위',          date:'7/3(금)',  time:'오전 04:00', venue:'소파이 스타디움 (로스앤젤레스)', feeds:93 },
+  81:  { round:'r32', half:'L', top:81.25, slot1:'미국 (D조 1위)', slot2:'B/E/F/I/J조 3위', date:'7/2(목)', time:'오전 09:00', venue:'리바이스 스타디움 (샌프란시스코 베이)', feeds:94 },
+  82:  { round:'r32', half:'L', top:93.75, slot1:'G조 1위', slot2:'A/E/H/I/J조 3위',  date:'7/2(목)',  time:'오전 05:00', venue:'루멘 필드 (시애틀)', feeds:94 },
+
+  // ── 32강 (Right half) ──
+  76:  { round:'r32', half:'R', top:6.25,  slot1:'C조 1위', slot2:'F조 2위',          date:'6/30(화)', time:'오전 02:00', venue:'NRG 스타디움 (휴스턴)', feeds:91 },
+  78:  { round:'r32', half:'R', top:18.75, slot1:'E조 2위', slot2:'I조 2위',          date:'7/1(수)',  time:'오전 02:00', venue:'AT&T 스타디움 (댈러스)', feeds:91 },
+  79:  { round:'r32', half:'R', top:31.25, slot1:'멕시코 (A조 1위)', slot2:'C/E/F/H/I조 3위', date:'7/1(수)', time:'오전 10:00', venue:'에스타디오 아스테카 (멕시코시티)', feeds:92 },
+  80:  { round:'r32', half:'R', top:43.75, slot1:'L조 1위', slot2:'E/H/I/J/K조 3위',  date:'7/2(목)',  time:'오전 01:00', venue:'메르세데스-벤츠 스타디움 (애틀랜타)', feeds:92 },
+  86:  { round:'r32', half:'R', top:56.25, slot1:'J조 1위', slot2:'H조 2위',          date:'7/4(토)',  time:'오전 07:00', venue:'하드록 스타디움 (마이애미)', feeds:95 },
+  88:  { round:'r32', half:'R', top:68.75, slot1:'D조 2위', slot2:'G조 2위',          date:'7/4(토)',  time:'오전 03:00', venue:'AT&T 스타디움 (댈러스)', feeds:95 },
+  85:  { round:'r32', half:'R', top:81.25, slot1:'B조 1위', slot2:'E/F/G/I/J조 3위',  date:'7/3(금)',  time:'오후 12:00', venue:'BC 플레이스 (밴쿠버)', feeds:96 },
+  87:  { round:'r32', half:'R', top:93.75, slot1:'K조 1위', slot2:'D/E/I/J/L조 3위',  date:'7/4(토)',  time:'오전 10:30', venue:'애로헤드 스타디움 (캔자스시티)', feeds:96 },
+
+  // ── 16강 ──
+  89: { round:'r16', half:'L', top:12.5, slot1:'M74 승자', slot2:'M77 승자', date:'7/5(일)', time:'오전 06:00', venue:'링컨 파이낸셜 필드 (필라델피아)', feeds:97 },
+  90: { round:'r16', half:'L', top:37.5, slot1:'M73 승자', slot2:'M75 승자', date:'7/5(일)', time:'오전 02:00', venue:'NRG 스타디움 (휴스턴)', feeds:97 },
+  93: { round:'r16', half:'L', top:62.5, slot1:'M83 승자', slot2:'M84 승자', date:'7/7(화)', time:'오전 04:00', venue:'AT&T 스타디움 (댈러스)', feeds:98 },
+  94: { round:'r16', half:'L', top:87.5, slot1:'M81 승자', slot2:'M82 승자', date:'7/7(화)', time:'오전 09:00', venue:'루멘 필드 (시애틀)', feeds:98 },
+
+  91: { round:'r16', half:'R', top:12.5, slot1:'M76 승자', slot2:'M78 승자', date:'7/6(월)', time:'오전 05:00', venue:'메트라이프 스타디움 (뉴욕/뉴저지)', feeds:99 },
+  92: { round:'r16', half:'R', top:37.5, slot1:'M79 승자', slot2:'M80 승자', date:'7/6(월)', time:'오전 09:00', venue:'에스타디오 아스테카 (멕시코시티)', feeds:99 },
+  95: { round:'r16', half:'R', top:62.5, slot1:'M86 승자', slot2:'M88 승자', date:'7/8(수)', time:'오전 01:00', venue:'메르세데스-벤츠 스타디움 (애틀랜타)', feeds:100 },
+  96: { round:'r16', half:'R', top:87.5, slot1:'M85 승자', slot2:'M87 승자', date:'7/8(수)', time:'오전 05:00', venue:'BC 플레이스 (밴쿠버)', feeds:100 },
+
+  // ── 8강 ──
+  97:  { round:'qf', half:'L', top:25, slot1:'M89 승자', slot2:'M90 승자', date:'7/10(금)', time:'오전 05:00', venue:'질레트 스타디움 (보스턴)', feeds:101 },
+  98:  { round:'qf', half:'L', top:75, slot1:'M93 승자', slot2:'M94 승자', date:'7/11(토)', time:'오전 04:00', venue:'소파이 스타디움 (로스앤젤레스)', feeds:101 },
+  99:  { round:'qf', half:'R', top:25, slot1:'M91 승자', slot2:'M92 승자', date:'7/12(일)', time:'오전 06:00', venue:'하드록 스타디움 (마이애미)', feeds:102 },
+  100: { round:'qf', half:'R', top:75, slot1:'M95 승자', slot2:'M96 승자', date:'7/12(일)', time:'오전 10:00', venue:'애로헤드 스타디움 (캔자스시티)', feeds:102 },
+
+  // ── 준결승 ──
+  101: { round:'sf', half:'L', top:50, slot1:'M97 승자', slot2:'M98 승자', date:'7/15(수)', time:'오전 04:00', venue:'AT&T 스타디움 (댈러스)', feeds:104 },
+  102: { round:'sf', half:'R', top:50, slot1:'M99 승자', slot2:'M100 승자', date:'7/16(목)', time:'오전 04:00', venue:'메르세데스-벤츠 스타디움 (애틀랜타)', feeds:104 },
+
+  // ── 결승 / 3·4위전 ──
+  104: { round:'final', half:'C', slot1:'M101 승자', slot2:'M102 승자', date:'7/20(월)', time:'오전 04:00', venue:'메트라이프 스타디움 (뉴욕/뉴저지)' },
+  103: { round:'third', half:'C', slot1:'M101 패자', slot2:'M102 패자', date:'7/19(일)', time:'오전 06:00', venue:'하드록 스타디움 (마이애미)' },
+};
+
+const ROUND_ORDER = ['r32','r16','qf','sf','third','final'];
+const ROUND_LABEL = { r32:'32강', r16:'16강', qf:'8강', sf:'준결승', third:'3·4위전', final:'결승' };
+
+// 독일(E조1위)·프랑스(I조1위)·잉글랜드(L조1위)가 각 라운드에서 승리한다고 가정했을 때의 진출 경로
+const HILITE = {
+  74: 'sh-germany', 77: 'sh-france', 80: 'sh-england',
+  89: 'sh-ger-fra', 92: 'sh-england',
+  97: 'sh-ger-fra', 99: 'sh-england',
+  101: 'sh-ger-fra', 102: 'sh-england',
+  104: 'sh-final3'
+};
+
+function cardHTML(num, m, extraClass) {
+  const hilite = HILITE[num] ? ' ' + HILITE[num] : '';
+  return `
+    <a class="m-card ${extraClass||''}${hilite}" href="schedule_calendar.html#match-${num}" style="${m.top!==undefined ? 'top:'+m.top+'%;' : ''}">
+      <div class="m-slot"><span class="m-dot"></span><span>${m.slot1}</span></div>
+      <div class="m-slot"><span class="m-dot"></span><span>${m.slot2}</span></div>
+      <div class="m-meta">M${num} · ${m.date} ${m.time}</div>
+    </a>`;
+}
+
+function buildHalf(side) {
+  const nums = { r32: [], r16: [], qf: [] };
+  Object.keys(M).forEach(n => {
+    const m = M[n];
+    if (m.half === side && nums[m.round]) nums[m.round].push(parseInt(n));
+  });
+  ['r32','r16','qf'].forEach(r => nums[r].sort((a,b) => M[a].top - M[b].top));
+
+  let html = '<div class="half' + (side==='R' ? ' half-right' : '') + '">';
+
+  // r32 col
+  html += '<div class="col">';
+  nums.r32.forEach(n => html += cardHTML(n, M[n]));
+  html += '</div>';
+
+  // gap1 (r32->r16)
+  html += '<div class="gap">';
+  nums.r16.forEach(n => {
+    const children = nums.r32.filter(c => M[c].feeds === n);
+    if (children.length === 2) {
+      const top = Math.min(M[children[0]].top, M[children[1]].top);
+      const height = Math.abs(M[children[0]].top - M[children[1]].top);
+      html += `<div class="conn-bar" style="top:${top}%;height:${height}%;"></div>`;
+    }
+  });
+  html += '</div>';
+
+  // r16 col
+  html += '<div class="col">';
+  nums.r16.forEach(n => html += cardHTML(n, M[n], 'is-result'));
+  html += '</div>';
+
+  // gap2 (r16->qf)
+  html += '<div class="gap">';
+  nums.qf.forEach(n => {
+    const children = nums.r16.filter(c => M[c].feeds === n);
+    if (children.length === 2) {
+      const top = Math.min(M[children[0]].top, M[children[1]].top);
+      const height = Math.abs(M[children[0]].top - M[children[1]].top);
+      html += `<div class="conn-bar" style="top:${top}%;height:${height}%;"></div>`;
+    }
+  });
+  html += '</div>';
+
+  // qf col
+  html += '<div class="col">';
+  nums.qf.forEach(n => html += cardHTML(n, M[n], 'is-result'));
+  html += '</div>';
+
+  // gap3 (qf->sf)
+  const sfNum = Object.keys(M).find(n => M[n].half === side && M[n].round === 'sf');
+  html += '<div class="gap">';
+  if (sfNum) {
+    const children = nums.qf.filter(c => M[c].feeds === parseInt(sfNum));
+    if (children.length === 2) {
+      const top = Math.min(M[children[0]].top, M[children[1]].top);
+      const height = Math.abs(M[children[0]].top - M[children[1]].top);
+      html += `<div class="conn-bar" style="top:${top}%;height:${height}%;"></div>`;
+    }
+  }
+  html += '</div>';
+
+  // sf col
+  html += '<div class="col">';
+  if (sfNum) html += cardHTML(sfNum, M[sfNum], 'is-result');
+  html += '</div>';
+
+  html += '</div>'; // .half
+  return html;
+}
+
+function buildCenter() {
+  let html = '<div class="center-col">';
+  html += '<div class="center-link cl-left"></div>';
+  html += '<div class="center-link cl-right"></div>';
+  html += `
+    <div class="trophy-box">
+      <div class="trophy-icon">🏆</div>
+      <div class="trophy-label">챔피언</div>
+    </div>`;
+  html += `
+    <a class="m-card sh-final3" href="schedule_calendar.html#match-104" style="top:50%;">
+      <span class="badge badge-final">결승</span>
+      <div class="m-slot"><span class="m-dot"></span><span>${M[104].slot1}</span></div>
+      <div class="m-slot"><span class="m-dot"></span><span>${M[104].slot2}</span></div>
+      <div class="m-meta">M104 · ${M[104].date} ${M[104].time}</div>
+    </a>`;
+  html += `
+    <a class="m-card" href="schedule_calendar.html#match-103" style="top:82%;">
+      <span class="badge badge-third">3·4위전</span>
+      <div class="m-slot"><span class="m-dot"></span><span>${M[103].slot1}</span></div>
+      <div class="m-slot"><span class="m-dot"></span><span>${M[103].slot2}</span></div>
+      <div class="m-meta">M103 · ${M[103].date} ${M[103].time}</div>
+    </a>`;
+  html += '</div>';
+  return html;
+}
+
+document.getElementById('tree-root').innerHTML =
+  buildHalf('L') + buildCenter() + buildHalf('R');
+
+// ── 모바일 탭 뷰 렌더 ──
+const tabsEl = document.getElementById('round-tabs');
+const panelsEl = document.getElementById('round-panels');
+
+ROUND_ORDER.forEach((r, idx) => {
+  const tab = document.createElement('div');
+  tab.className = 'round-tab' + (idx === 0 ? ' active' : '');
+  tab.textContent = ROUND_LABEL[r];
+  tab.dataset.round = r;
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.round-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.mobile-round-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('panel-' + r).classList.add('active');
+  });
+  tabsEl.appendChild(tab);
+
+  const panel = document.createElement('div');
+  panel.className = 'mobile-round-panel' + (idx === 0 ? ' active' : '');
+  panel.id = 'panel-' + r;
+
+  const nums = Object.keys(M).filter(n => M[n].round === r)
+    .sort((a,b) => {
+      const ma = M[a], mb = M[b];
+      if (ma.date !== mb.date) return parseInt(a) - parseInt(b);
+      return parseInt(a) - parseInt(b);
+    });
+
+  let listHTML = '<div class="mobile-matches">';
+  nums.forEach(n => {
+    const m = M[n];
+    const cls = HILITE[n] || '';
+    listHTML += `
+      <a class="mobile-card ${cls}" href="schedule_calendar.html#match-${n}">
+        <div class="mobile-top">
+          <span class="mobile-number">M${n}</span>
+          <div class="mobile-datetime"><b>${m.date}</b> ${m.time}</div>
+        </div>
+        <div class="mobile-teams">${m.slot1} vs ${m.slot2}</div>
+        <div class="mobile-venue">🏟 ${m.venue}</div>
+      </a>`;
+  });
+  listHTML += '</div>';
+  panel.innerHTML = listHTML;
+  panelsEl.appendChild(panel);
+});
+</script>
+
+</body>
+</html>
