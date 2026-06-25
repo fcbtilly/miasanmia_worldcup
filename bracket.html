@@ -480,7 +480,7 @@ function cardHTML(num, m, extraClass) {
     <a class="m-card ${extraClass||''}${hilite}" href="schedule_calendar.html#match-${num}" style="${m.top!==undefined ? 'top:'+m.top+'%;' : ''}">
       <div class="m-slot"><span class="m-dot"></span><span>${m.slot1}</span></div>
       <div class="m-slot"><span class="m-dot"></span><span>${m.slot2}</span></div>
-      <div class="m-meta">M${num} · ${m.date} ${m.time}</div>
+      <div class="m-meta">${ROUND_LABEL[m.round]} · ${m.date} ${m.time}</div>
     </a>`;
 }
 
@@ -569,14 +569,14 @@ function buildCenter() {
       <span class="badge badge-final">결승</span>
       <div class="m-slot"><span class="m-dot"></span><span>${M[104].slot1}</span></div>
       <div class="m-slot"><span class="m-dot"></span><span>${M[104].slot2}</span></div>
-      <div class="m-meta">M104 · ${M[104].date} ${M[104].time}</div>
+      <div class="m-meta">결승 · ${M[104].date} ${M[104].time}</div>
     </a>`;
   html += `
     <a class="m-card" href="schedule_calendar.html#match-103" style="top:82%;">
       <span class="badge badge-third">3·4위전</span>
       <div class="m-slot"><span class="m-dot"></span><span>${M[103].slot1}</span></div>
       <div class="m-slot"><span class="m-dot"></span><span>${M[103].slot2}</span></div>
-      <div class="m-meta">M103 · ${M[103].date} ${M[103].time}</div>
+      <div class="m-meta">3·4위전 · ${M[103].date} ${M[103].time}</div>
     </a>`;
   html += '</div>';
   return html;
@@ -620,7 +620,7 @@ ROUND_ORDER.forEach((r, idx) => {
     listHTML += `
       <a class="mobile-card ${cls}" href="schedule_calendar.html#match-${n}">
         <div class="mobile-top">
-          <span class="mobile-number">M${n}</span>
+          <span class="mobile-number">${ROUND_LABEL[m.round]}</span>
           <div class="mobile-datetime"><b>${m.date}</b> ${m.time}</div>
         </div>
         <div class="mobile-teams">${m.slot1} vs ${m.slot2}</div>
