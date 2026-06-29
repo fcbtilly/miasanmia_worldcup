@@ -392,7 +392,7 @@
 </div>
 
 <div class="notice">
-  ⚠️ 대진(팀)은 조별리그 최종 결과가 나와야 확정됩니다. 매치 번호·날짜·시간·경기장은 FIFA가 사전에 확정한 정보이며, 조별리그가 끝나는 대로 실제 대진으로 업데이트할 예정입니다.<br>
+  ✅ 조별리그가 종료되어 32강 대진이 모두 확정되었습니다 (한국은 와일드카드 경쟁에서 밀려 탈락). 16강부터는 32강 결과가 나와야 확정됩니다.<br>
   * 시간은 모두 한국시간(KST) 기준입니다. 화면이 좁으면(모바일) 라운드별 탭으로 자동 전환됩니다.<br>
   * 각 경기 카드를 클릭하면 전체 일정표의 해당 날짜로 바로 이동합니다.
 </div>
@@ -417,24 +417,24 @@
 // ───────────────────────────────────────────────
 const M = {
   // ── 32강 (Left half) ──
-  74:  { round:'r32', half:'L', top:6.25,  slot1:'E조 1위', slot2:'A/B/C/D/F조 3위', date:'6/30(화)', time:'오전 05:30', venue:'질레트 스타디움 (보스턴)', feeds:89 },
-  77:  { round:'r32', half:'L', top:18.75, slot1:'I조 1위', slot2:'C/D/F/G/H조 3위', date:'7/1(수)',  time:'오전 06:00', venue:'메트라이프 스타디움 (뉴욕/뉴저지)', feeds:89 },
-  73:  { round:'r32', half:'L', top:31.25, slot1:'A조 2위', slot2:'B조 2위',          date:'6/29(월)', time:'오전 04:00', venue:'소파이 스타디움 (로스앤젤레스)', feeds:90 },
-  75:  { round:'r32', half:'L', top:43.75, slot1:'F조 1위', slot2:'C조 2위',          date:'6/30(화)', time:'오전 10:00', venue:'에스타디오 BBVA (몬테레이)', feeds:90 },
-  83:  { round:'r32', half:'L', top:56.25, slot1:'K조 2위', slot2:'L조 2위',          date:'7/3(금)',  time:'오전 08:00', venue:'BMO 필드 (토론토)', feeds:93 },
-  84:  { round:'r32', half:'L', top:68.75, slot1:'H조 1위', slot2:'J조 2위',          date:'7/3(금)',  time:'오전 04:00', venue:'소파이 스타디움 (로스앤젤레스)', feeds:93 },
-  81:  { round:'r32', half:'L', top:81.25, slot1:'미국 (D조 1위)', slot2:'B/E/F/I/J조 3위', date:'7/2(목)', time:'오전 09:00', venue:'리바이스 스타디움 (샌프란시스코 베이)', feeds:94 },
-  82:  { round:'r32', half:'L', top:93.75, slot1:'G조 1위', slot2:'A/E/H/I/J조 3위',  date:'7/2(목)',  time:'오전 05:00', venue:'루멘 필드 (시애틀)', feeds:94 },
+  74:  { round:'r32', half:'L', top:6.25,  slot1:'독일 (E조 1위)', slot2:'파라과이 (D조 3위)', date:'6/30(화)', time:'오전 05:30', venue:'질레트 스타디움 (보스턴)', feeds:89 },
+  77:  { round:'r32', half:'L', top:18.75, slot1:'프랑스 (I조 1위)', slot2:'스웨덴 (F조 3위)', date:'7/1(수)',  time:'오전 06:00', venue:'메트라이프 스타디움 (뉴욕/뉴저지)', feeds:89 },
+  73:  { round:'r32', half:'L', top:31.25, slot1:'남아프리카공화국 (A조 2위)', slot2:'캐나다 (B조 2위)',          date:'6/29(월)', time:'오전 04:00', venue:'소파이 스타디움 (로스앤젤레스)', feeds:90 },
+  75:  { round:'r32', half:'L', top:43.75, slot1:'네덜란드 (F조 1위)', slot2:'모로코 (C조 2위)',          date:'6/30(화)', time:'오전 10:00', venue:'에스타디오 BBVA (몬테레이)', feeds:90 },
+  83:  { round:'r32', half:'L', top:56.25, slot1:'포르투갈 (K조 2위)', slot2:'크로아티아 (L조 2위)',          date:'7/3(금)',  time:'오전 08:00', venue:'BMO 필드 (토론토)', feeds:93 },
+  84:  { round:'r32', half:'L', top:68.75, slot1:'스페인 (H조 1위)', slot2:'오스트리아 (J조 2위)',          date:'7/3(금)',  time:'오전 04:00', venue:'소파이 스타디움 (로스앤젤레스)', feeds:93 },
+  81:  { round:'r32', half:'L', top:81.25, slot1:'미국 (D조 1위)', slot2:'보스니아 헤르체고비나 (B조 3위)', date:'7/2(목)', time:'오전 09:00', venue:'리바이스 스타디움 (샌프란시스코 베이)', feeds:94 },
+  82:  { round:'r32', half:'L', top:93.75, slot1:'벨기에 (G조 1위)', slot2:'세네갈 (I조 3위)',  date:'7/2(목)',  time:'오전 05:00', venue:'루멘 필드 (시애틀)', feeds:94 },
 
   // ── 32강 (Right half) ──
-  76:  { round:'r32', half:'R', top:6.25,  slot1:'C조 1위', slot2:'F조 2위',          date:'6/30(화)', time:'오전 02:00', venue:'NRG 스타디움 (휴스턴)', feeds:91 },
-  78:  { round:'r32', half:'R', top:18.75, slot1:'E조 2위', slot2:'I조 2위',          date:'7/1(수)',  time:'오전 02:00', venue:'AT&T 스타디움 (댈러스)', feeds:91 },
-  79:  { round:'r32', half:'R', top:31.25, slot1:'멕시코 (A조 1위)', slot2:'C/E/F/H/I조 3위', date:'7/1(수)', time:'오전 10:00', venue:'에스타디오 아스테카 (멕시코시티)', feeds:92 },
-  80:  { round:'r32', half:'R', top:43.75, slot1:'L조 1위', slot2:'E/H/I/J/K조 3위',  date:'7/2(목)',  time:'오전 01:00', venue:'메르세데스-벤츠 스타디움 (애틀랜타)', feeds:92 },
-  86:  { round:'r32', half:'R', top:56.25, slot1:'J조 1위', slot2:'H조 2위',          date:'7/4(토)',  time:'오전 07:00', venue:'하드록 스타디움 (마이애미)', feeds:95 },
-  88:  { round:'r32', half:'R', top:68.75, slot1:'D조 2위', slot2:'G조 2위',          date:'7/4(토)',  time:'오전 03:00', venue:'AT&T 스타디움 (댈러스)', feeds:95 },
-  85:  { round:'r32', half:'R', top:81.25, slot1:'B조 1위', slot2:'E/F/G/I/J조 3위',  date:'7/3(금)',  time:'오후 12:00', venue:'BC 플레이스 (밴쿠버)', feeds:96 },
-  87:  { round:'r32', half:'R', top:93.75, slot1:'K조 1위', slot2:'D/E/I/J/L조 3위',  date:'7/4(토)',  time:'오전 10:30', venue:'애로헤드 스타디움 (캔자스시티)', feeds:96 },
+  76:  { round:'r32', half:'R', top:6.25,  slot1:'브라질 (C조 1위)', slot2:'일본 (F조 2위)',          date:'6/30(화)', time:'오전 02:00', venue:'NRG 스타디움 (휴스턴)', feeds:91 },
+  78:  { round:'r32', half:'R', top:18.75, slot1:'코트디부아르 (E조 2위)', slot2:'노르웨이 (I조 2위)',          date:'7/1(수)',  time:'오전 02:00', venue:'AT&T 스타디움 (댈러스)', feeds:91 },
+  79:  { round:'r32', half:'R', top:31.25, slot1:'멕시코 (A조 1위)', slot2:'에콰도르 (E조 3위)', date:'7/1(수)', time:'오전 10:00', venue:'에스타디오 아스테카 (멕시코시티)', feeds:92 },
+  80:  { round:'r32', half:'R', top:43.75, slot1:'잉글랜드 (L조 1위)', slot2:'콩고민주공화국 (K조 3위)',  date:'7/2(목)',  time:'오전 01:00', venue:'메르세데스-벤츠 스타디움 (애틀랜타)', feeds:92 },
+  86:  { round:'r32', half:'R', top:56.25, slot1:'아르헨티나 (J조 1위)', slot2:'카보베르데 (H조 2위)',          date:'7/4(토)',  time:'오전 07:00', venue:'하드록 스타디움 (마이애미)', feeds:95 },
+  88:  { round:'r32', half:'R', top:68.75, slot1:'호주 (D조 2위)', slot2:'이집트 (G조 2위)',          date:'7/4(토)',  time:'오전 03:00', venue:'AT&T 스타디움 (댈러스)', feeds:95 },
+  85:  { round:'r32', half:'R', top:81.25, slot1:'스위스 (B조 1위)', slot2:'알제리 (J조 3위)',  date:'7/3(금)',  time:'오후 12:00', venue:'BC 플레이스 (밴쿠버)', feeds:96 },
+  87:  { round:'r32', half:'R', top:93.75, slot1:'콜롬비아 (K조 1위)', slot2:'가나 (L조 3위)',  date:'7/4(토)',  time:'오전 10:30', venue:'애로헤드 스타디움 (캔자스시티)', feeds:96 },
 
   // ── 16강 ──
   89: { round:'r16', half:'L', top:12.5, slot1:'M74 승자', slot2:'M77 승자', date:'7/5(일)', time:'오전 06:00', venue:'링컨 파이낸셜 필드 (필라델피아)', feeds:97 },
